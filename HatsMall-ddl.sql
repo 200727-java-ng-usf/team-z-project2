@@ -47,7 +47,9 @@ user_order_id		serial 		 	 primary key,
 time_created		timestamp		 not null,
 user_id				int				 not null		references mall_users(user_id),
 --item_id	            int              not null       references item_hats(item_id),
-item_count			int				 not null
+item_count			int				 not null,
+price               numeric(6,2)     not null
+
 )
 
 create table ordered_items(
