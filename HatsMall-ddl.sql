@@ -46,8 +46,16 @@ create table mall_user_orders(
 user_order_id		serial 		 	 primary key,
 time_created		timestamp		 not null,
 user_id				int				 not null		references mall_users(user_id),
-item_id	            int              not null       references item_hats(item_id),
+--item_id	            int              not null       references item_hats(item_id),
 item_count			int				 not null
+)
+
+create table ordered_items(
+
+ordered_item_id     serial          primary key,
+user_order_id       int             not null        references mall_user_orders(user_order_id),
+item_id             int             not null        references item_hats(item_id)
+
 )
 
 commit;
