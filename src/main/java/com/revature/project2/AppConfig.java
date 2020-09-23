@@ -1,6 +1,7 @@
 package com.revature.project2;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,8 +23,6 @@ import java.util.Properties;
 @PropertySource("application.properties")
 public class AppConfig {
 
-    // Comment
-
     @Value("${dbDriver}")
     private String dbDriver;
 
@@ -43,22 +42,11 @@ public class AppConfig {
     public BasicDataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream dbPropertiesStream = classLoader.getResourceAsStream("application.properties");
-        Properties dbProperties = new Properties();
-
-        try {
-            dbProperties.load(dbPropertiesStream);
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-
-        dataSource.setDriverClassName(dbProperties.getProperty("driver"));
-        dataSource.setUrl(dbProperties.getProperty("url"));
-        dataSource.setUsername(dbProperties.getProperty("username"));
-        dataSource.setPassword(dbProperties.getProperty("password"));
+        dataSource.setDriverClassName(dbDriver);
+        dataSource.setUrl(dbUrl);
+        dataSource.setDefaultSchema(dbSchema);
+        dataSource.setUsername(dbUsername);
+        dataSource.setPassword(dbPassword);
 
         return dataSource;
 
@@ -82,10 +70,10 @@ public class AppConfig {
 
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialest.Oracle10gDialect");
-        hibernateProperties.setProperty("hibernate.show_sql", "true");
-        hibernateProperties.setProperty("hibernate.format_sql", "true");
-        hibernateProperties.setProperty("hibernate.hbmddl.auto", "validate");
+        hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialest.PostgreSQL95Dialect");
+        hibernateProperties.setProperty(Environment.SHOW_SQL, "true");
+        hibernateProperties.setProperty(Environment.FORMAT_SQL, "true");
+        hibernateProperties.setProperty(Environment.HBM2DDL_AUTO, "validate");
         return hibernateProperties;
     }
 

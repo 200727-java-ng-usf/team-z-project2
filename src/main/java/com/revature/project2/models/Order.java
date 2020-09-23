@@ -18,7 +18,8 @@ public class Order {
 
     @ManyToOne // many orders to one user. References mall_users
     @JoinColumn // specify what to join?
-    private Integer userId;
+    private User user; // change this to User
+    // will refer to primary key in user table if changed to User
 
     @Column(nullable = false)
     private Integer itemCount;
@@ -30,26 +31,26 @@ public class Order {
     public Order () { super(); }
 
     // constructor without ID
-    public Order (Timestamp timeCreated, Integer userId, Integer itemCount, Double price) {
+    public Order (Timestamp timeCreated, User user, Integer itemCount, Double price) {
 
         this.timeCreated = timeCreated;
-        this.userId = userId;
+        this.user = user;
         this.itemCount = itemCount;
         this.price = price;
 
     }
 
     // full constructor
-    public Order (Integer id, Timestamp timeCreated, Integer userId, Integer itemCount, Double price) {
+    public Order (Integer id, Timestamp timeCreated, User user, Integer itemCount, Double price) {
 
-        this (timeCreated, userId, itemCount, price);
+        this (timeCreated, user, itemCount, price);
         this.id = id;
 
     }
 
     // copy constructor
     public Order (Order copy) {
-        this (copy.id, copy.timeCreated, copy.userId, copy.itemCount, copy.price);
+        this (copy.id, copy.timeCreated, copy.user, copy.itemCount, copy.price);
     }
 
     public Integer getId() {
@@ -68,12 +69,12 @@ public class Order {
         this.timeCreated = timeCreated;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getItemCount() {
@@ -99,14 +100,14 @@ public class Order {
         Order order = (Order) o;
         return Objects.equals(id, order.id) &&
                 Objects.equals(timeCreated, order.timeCreated) &&
-                Objects.equals(userId, order.userId) &&
+                Objects.equals(user, order.user) &&
                 Objects.equals(itemCount, order.itemCount) &&
                 Objects.equals(price, order.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, timeCreated, userId, itemCount, price);
+        return Objects.hash(id, timeCreated, user, itemCount, price);
     }
 
     @Override
@@ -114,7 +115,7 @@ public class Order {
         return "Order{" +
                 "id=" + id +
                 ", timeCreated=" + timeCreated +
-                ", userId=" + userId +
+                ", user=" + user +
                 ", itemCount=" + itemCount +
                 ", price=" + price +
                 '}';

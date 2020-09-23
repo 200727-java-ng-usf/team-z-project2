@@ -1,5 +1,7 @@
 package com.revature.project2.services;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface Service<T> {
@@ -9,11 +11,11 @@ public interface Service<T> {
     // CRUD operations
     // save, find, update, delete
 
-    T save (T t);
+    Optional<T> save (T t);
 
-    T findById (Integer id);
+    Optional<T> findById (Integer id);
 
-    Set<T> findAll ();
+    List<T> findAll ();
 
     boolean update (T t);
 
