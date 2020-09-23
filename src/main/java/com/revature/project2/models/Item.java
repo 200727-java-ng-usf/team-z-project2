@@ -12,13 +12,13 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="item_name")
+    @Column(name="item_name", nullable = false)
     private String name;
 
-    @Column(name="item_price")
+    @Column(name="item_price", nullable = false)
     private Double price;
 
-    @Column(name="item_stock")
+    @Column(name="item_stock", nullable = false)
     private Integer stock;
 
     @Column(name="decription")

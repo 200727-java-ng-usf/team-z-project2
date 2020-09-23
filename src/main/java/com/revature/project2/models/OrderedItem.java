@@ -1,13 +1,20 @@
 package com.revature.project2.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 public class OrderedItem {
 
+    @Id
+    @Column
     private Integer id;
 
+    @ManyToOne // many ordered items to one order id
+    @JoinColumn // references order_id in order table
     private Integer userOrderId;
 
+    @ManyToOne // Many ordered items to one item
+    @JoinColumn // references items table
     private Integer itemId;
 
     // no-args constructor

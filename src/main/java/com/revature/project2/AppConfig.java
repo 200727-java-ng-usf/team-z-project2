@@ -1,6 +1,7 @@
-package com.revature.project2.config;
+package com.revature.project2;
 
-import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +17,25 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @Configuration
+@ComponentScan
 @EnableTransactionManagement
 @PropertySource("application.properties")
 public class AppConfig {
+
+    @Value("${dbDriver}")
+    private String dbDriver;
+
+    @Value("${dbUrl}")
+    private String dbUrl;
+
+    @Value("${dbSchema}")
+    private String dbSchema;
+
+    @Value("${dbUsername}")
+    private String dbUsername;
+
+    @Value("${dbPassword}")
+    private String dbPassword;
 
     @Bean
     public BasicDataSource dataSource() {
@@ -66,7 +83,7 @@ public class AppConfig {
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialest.Oracle10gDialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
         hibernateProperties.setProperty("hibernate.format_sql", "true");
-        hibernateProperties.setProperty("hibernate.hbmddl.auto", "create-drop");
+        hibernateProperties.setProperty("hibernate.hbmddl.auto", "validate");
         return hibernateProperties;
     }
 

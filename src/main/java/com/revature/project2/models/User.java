@@ -12,25 +12,28 @@ public class User {
 
     @Id
     @Column(name="user_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
-    @Column(name="firstname")
+    @Column(name="firstname", nullable = false)
     private String firstName;
 
-    @Column(name="lastname")
+    @Column(name="lastname", nullable = false)
     private String lastName;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    // no-args constructor
     public User() {
         super();
     }
