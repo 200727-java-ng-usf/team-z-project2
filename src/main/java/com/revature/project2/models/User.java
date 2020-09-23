@@ -1,22 +1,34 @@
 package com.revature.project2.models;
 
-import javax.persistence.Column;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="mall_users")
 public class User {
 
+    @Id
+    @Column(name="user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String username;
 
     private String password;
 
+    @Column(name="firstname")
     private String firstName;
 
+    @Column(name="lastname")
     private String lastName;
 
+    @Column
     private String email;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public User() {
