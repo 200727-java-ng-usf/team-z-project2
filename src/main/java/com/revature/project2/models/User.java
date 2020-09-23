@@ -1,39 +1,24 @@
 package com.revature.project2.models;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
-import javax.persistence.*;
+import javax.persistence.Column;
 import java.util.Objects;
 
-@Entity
-@Table(name="mall_users")
 public class User {
 
-    @Id
-    @Column(name="user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
     private String password;
 
-    @Column(name="firstname", nullable = false)
     private String firstName;
 
-    @Column(name="lastname", nullable = false)
     private String lastName;
 
-    @Column(unique = true, nullable = false)
     private String email;
 
-    @Enumerated(EnumType.STRING)
     private Role role;
 
-    // no-args constructor
     public User() {
         super();
     }
