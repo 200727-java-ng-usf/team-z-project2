@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.SpringSessionContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -20,22 +21,22 @@ import java.util.Properties;
 @Configuration
 @ComponentScan
 @EnableTransactionManagement
-@PropertySource("application.properties")
+@PropertySource("classpath:application.properties")
 public class AppConfig {
 
-    @Value("${dbDriver}")
+    @Value("${db.driver}")
     private String dbDriver;
 
-    @Value("${dbUrl}")
+    @Value("${db.url}")
     private String dbUrl;
 
-    @Value("${dbSchema}")
+    @Value("${db.schema}")
     private String dbSchema;
 
-    @Value("${dbUsername}")
+    @Value("${db.username}")
     private String dbUsername;
 
-    @Value("${dbPassword}")
+    @Value("${db.password}")
     private String dbPassword;
 
     @Bean
@@ -68,7 +69,7 @@ public class AppConfig {
         return transactionManager;
     }
 
-    private final Properties hibernateProperties() {
+    private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialest.PostgreSQL95Dialect");
         hibernateProperties.setProperty(Environment.SHOW_SQL, "true");
