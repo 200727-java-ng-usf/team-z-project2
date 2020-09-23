@@ -27,12 +27,12 @@ public class OrderService implements Service<Order> {
     }
 
     @Override
-    public Order update(Order order) {
-        return null;
+    public boolean update(Order order) {
+        return false;
     }
 
     @Override
-    public Order delete(Order order) {
-        return null;
+    public boolean delete(Order order) {
+        return false;
     }
 }

@@ -27,12 +27,12 @@ public class ItemService implements Service<Item> {
     }
 
     @Override
-    public Item update(Item item) {
-        return null;
+    public boolean update(Item item) {
+        return false;
     }
 
     @Override
-    public Item delete(Item item) {
-        return null;
+    public boolean delete(Item item) {
+        return false;
     }
 }

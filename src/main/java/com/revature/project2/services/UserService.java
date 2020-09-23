@@ -28,13 +28,13 @@ public class UserService implements Service<User> {
     }
 
     @Override
-    public User update(User user) {
-        return null;
+    public boolean update(User user) {
+        return false;
     }
 
     @Override
-    public User delete(User user) {
-        return null;
+    public boolean delete(User user) {
+        return false;
     }
 
 

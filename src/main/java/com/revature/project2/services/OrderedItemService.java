@@ -27,12 +27,12 @@ public class OrderedItemService implements Service<OrderedItem> {
     }
 
     @Override
-    public OrderedItem update(OrderedItem orderedItem) {
-        return null;
+    public boolean update(OrderedItem orderedItem) {
+        return false;
     }
 
     @Override
-    public OrderedItem delete(OrderedItem orderedItem) {
-        return null;
+    public boolean delete(OrderedItem orderedItem) {
+        return false;
     }
 }

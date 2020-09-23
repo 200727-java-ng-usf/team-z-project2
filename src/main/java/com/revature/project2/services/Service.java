@@ -13,8 +13,8 @@ public interface Service<T> {
 
     Set<T> findAll ();
 
-    T update (T t);
+    boolean update (T t);
 
-    T delete (T t);
+    boolean delete (T t);
 
 }
