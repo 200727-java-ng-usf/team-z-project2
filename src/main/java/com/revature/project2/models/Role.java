@@ -3,10 +3,10 @@ package com.revature.project2.models;
 public enum Role {
 
     // values declared within enums are constants and are comma separated
-    USER("Admin"),
+    USER("User"),
     MANAGER("Manager"),
-    ADMIN("Premium Member"),
-    INACTIVE("Basic Member");
+    ADMIN("Admin"),
+    INACTIVE("Inactive");
 
     private String roleName;
 
