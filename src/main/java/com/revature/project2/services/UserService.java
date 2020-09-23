@@ -1,10 +1,42 @@
 package com.revature.project2.services;
 
-public class UserService implements Service {
+import com.revature.project2.models.User;
+import org.springframework.stereotype.Component;
+
+import java.util.Set;
+
+@Component
+public class UserService implements Service<User> {
 
     public UserService() {
         System.out.println("UserService constructor");
     }
+
+    @Override
+    public User save(User user) {
+        return null;
+    }
+
+    @Override
+    public User findById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Set<User> findAll() {
+        return null;
+    }
+
+    @Override
+    public User update(User user) {
+        return null;
+    }
+
+    @Override
+    public User delete(User user) {
+        return null;
+    }
+
 
     // UserService should have all CRUD operations from Service interface AND authentication method
 
