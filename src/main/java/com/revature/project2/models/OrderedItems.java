@@ -2,7 +2,7 @@ package com.revature.project2.models;
 
 import java.util.Objects;
 
-public class OrderedItem {
+public class OrderedItems {
 
     private Integer id;
 
@@ -11,10 +11,10 @@ public class OrderedItem {
     private Integer itemId;
 
     // no-args constructor
-    public OrderedItem() { super(); }
+    public OrderedItems () { super(); }
 
     // constructor without ID
-    public OrderedItem(Integer userOrderId, Integer itemId) {
+    public OrderedItems (Integer userOrderId, Integer itemId) {
 
         this.userOrderId = userOrderId;
         this.itemId = itemId;
@@ -22,7 +22,7 @@ public class OrderedItem {
     }
 
     // full constructor
-    public OrderedItem(Integer id, Integer userOrderId, Integer itemId) {
+    public OrderedItems (Integer id, Integer userOrderId, Integer itemId) {
 
         this (userOrderId, itemId);
         this.id = id;
@@ -30,7 +30,7 @@ public class OrderedItem {
     }
 
     // copy constructor
-    public OrderedItem(OrderedItem copy) {
+    public OrderedItems (OrderedItems copy) {
 
         this (copy.id, copy.userOrderId, copy.itemId);
 
@@ -64,7 +64,7 @@ public class OrderedItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderedItem that = (OrderedItem) o;
+        OrderedItems that = (OrderedItems) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(userOrderId, that.userOrderId) &&
                 Objects.equals(itemId, that.itemId);
