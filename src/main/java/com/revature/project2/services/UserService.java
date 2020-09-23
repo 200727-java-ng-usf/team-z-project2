@@ -8,6 +8,8 @@ import java.util.Set;
 @Component
 public class UserService implements Service<User> {
 
+    // Comment
+
     public UserService() {
         System.out.println("UserService constructor");
     }

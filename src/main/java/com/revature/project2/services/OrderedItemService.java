@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class OrderedItemService implements Service<OrderedItem> {
 
+    // Comment
+
     public OrderedItemService() {
         System.out.println("OrderedItemService constructor");
     }

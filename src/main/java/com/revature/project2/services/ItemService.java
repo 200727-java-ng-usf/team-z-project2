@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class ItemService implements Service<Item> {
 
+    // Comment
+
     public ItemService() {
         System.out.println("ItemService constructor");
     }

@@ -22,6 +22,8 @@ import java.util.Properties;
 @PropertySource("application.properties")
 public class AppConfig {
 
+    // Comment
+
     @Value("${dbDriver}")
     private String dbDriver;
 

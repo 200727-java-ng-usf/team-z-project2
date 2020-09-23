@@ -4,6 +4,8 @@ import java.util.Set;
 
 public interface CrudRepository<T> {
 
+    // Comment
+
     T save (T t);
 
     T findById (Integer id);

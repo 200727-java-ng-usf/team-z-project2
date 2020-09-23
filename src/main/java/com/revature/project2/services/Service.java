@@ -4,6 +4,8 @@ import java.util.Set;
 
 public interface Service<T> {
 
+    // Comment
+
     // CRUD operations
     // save, find, update, delete
 
