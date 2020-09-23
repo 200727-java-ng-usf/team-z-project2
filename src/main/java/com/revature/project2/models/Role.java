@@ -29,7 +29,7 @@ public enum Role {
 
     @Override
     public String toString() {
-        return roleName;
+        return this.roleName;
     }
 
 }

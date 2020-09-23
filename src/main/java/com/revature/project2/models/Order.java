@@ -1,19 +1,29 @@
 package com.revature.project2.models;
 
+import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Entity
+@Table(name="mall_user_orders")
 public class Order {
 
+    @Id
+    @Column
     private Integer id;
 
+    @Column(nullable = false)
     private Timestamp timeCreated;
 
+    @ManyToOne // many orders to one user. References mall_users
+    @JoinColumn // specify what to join?
     private Integer userId;
 
+    @Column(nullable = false)
     private Integer itemCount;
 
+    @Column(nullable = false)
     private Double price;
 
     // no-args constructor

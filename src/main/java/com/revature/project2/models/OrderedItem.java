@@ -1,20 +1,27 @@
 package com.revature.project2.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-public class OrderedItems {
+public class OrderedItem {
 
+    @Id
+    @Column
     private Integer id;
 
+    @ManyToOne // many ordered items to one order id
+    @JoinColumn // references order_id in order table
     private Integer userOrderId;
 
+    @ManyToOne // Many ordered items to one item
+    @JoinColumn // references items table
     private Integer itemId;
 
     // no-args constructor
-    public OrderedItems () { super(); }
+    public OrderedItem() { super(); }
 
     // constructor without ID
-    public OrderedItems (Integer userOrderId, Integer itemId) {
+    public OrderedItem(Integer userOrderId, Integer itemId) {
 
         this.userOrderId = userOrderId;
         this.itemId = itemId;
@@ -22,7 +29,7 @@ public class OrderedItems {
     }
 
     // full constructor
-    public OrderedItems (Integer id, Integer userOrderId, Integer itemId) {
+    public OrderedItem(Integer id, Integer userOrderId, Integer itemId) {
 
         this (userOrderId, itemId);
         this.id = id;
@@ -30,7 +37,7 @@ public class OrderedItems {
     }
 
     // copy constructor
-    public OrderedItems (OrderedItems copy) {
+    public OrderedItem(OrderedItem copy) {
 
         this (copy.id, copy.userOrderId, copy.itemId);
 
@@ -64,7 +71,7 @@ public class OrderedItems {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderedItems that = (OrderedItems) o;
+        OrderedItem that = (OrderedItem) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(userOrderId, that.userOrderId) &&
                 Objects.equals(itemId, that.itemId);

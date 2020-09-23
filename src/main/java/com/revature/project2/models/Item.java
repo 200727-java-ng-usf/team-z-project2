@@ -1,21 +1,33 @@
 package com.revature.project2.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="item_hats")
 public class Item {
 
+    @Id
+    @Column(name="item_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name="item_name", nullable = false)
     private String name;
 
+    @Column(name="item_price", nullable = false)
     private Double price;
 
+    @Column(name="item_stock", nullable = false)
     private Integer stock;
 
+    @Column(name="decription")
     private String description;
 
+    @Column(name="item_image_url")
     private String itemImageUrl;
 
+    @Enumerated(EnumType.STRING)
     private Genre genre;
 
     // no-args constructor
