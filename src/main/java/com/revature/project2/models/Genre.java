@@ -30,7 +30,7 @@ public enum Genre {
 
     @Override
     public String toString() {
-        return genreName;
+        return this.genreName;
     }
 
 }

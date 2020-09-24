@@ -1,46 +1,58 @@
 package com.revature.project2.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name="item_hats")
 public class Item {
 
+    @Id
+    @Column(name="item_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name="item_name", nullable = false)
     private String name;
 
+    @Column(name="item_price", nullable = false)
     private Double price;
 
+    @Column(name="item_stock", nullable = false)
     private Integer stock;
 
+    @Column(name="decription")
     private String description;
 
+    @Column(name="item_image_url")
     private String itemImageUrl;
 
-    private Genre genre;
+    @Column(name = "genre_id")
+    private Integer genre_id;
 
     // no-args constructor
-    public Item () { super(); }
+    public Item() { super(); }
 
     // constructor no ID
-    public Item (String name, Double price, Integer stock, String description, String itemImageUrl, Genre genre) {
+    public Item(String name, Double price, Integer stock, String description, String itemImageUrl, Integer genre_id) {
         this.name = name;
         this.price = price;
         this.stock = stock;
         this.description = description;
         this.itemImageUrl = itemImageUrl;
-        this.genre = genre;
+        this.genre_id = genre_id;
     }
 
     // full constructor
-    public Item (Integer id, String name, Double price, Integer stock, String description, String itemImageUrl, Genre genre) {
-        this (name, price, stock, description, itemImageUrl, genre);
+    public Item(Integer id, String name, Double price, Integer stock, String description, String itemImageUrl, Integer genre_id) {
+        this (name, price, stock, description, itemImageUrl, genre_id);
         this.id = id;
     }
 
     // copy constructor
-    public Item (Item copy) {
+    public Item(Item copy) {
 
-        this (copy.id, copy.name, copy.price, copy.stock, copy.description, copy.itemImageUrl, copy.genre);
+        this (copy.id, copy.name, copy.price, copy.stock, copy.description, copy.itemImageUrl, copy.genre_id);
 
     }
 
@@ -92,12 +104,12 @@ public class Item {
         this.itemImageUrl = itemImageUrl;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public Integer getGenre() {
+        return genre_id;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenre(Integer genre_id) {
+        this.genre_id = genre_id;
     }
 
     @Override
@@ -111,12 +123,12 @@ public class Item {
                 Objects.equals(stock, item.stock) &&
                 Objects.equals(description, item.description) &&
                 Objects.equals(itemImageUrl, item.itemImageUrl) &&
-                genre == item.genre;
+                genre_id == item.genre_id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, stock, description, itemImageUrl, genre);
+        return Objects.hash(id, name, price, stock, description, itemImageUrl, genre_id);
     }
 
     @Override
@@ -128,7 +140,7 @@ public class Item {
                 ", stock=" + stock +
                 ", description='" + description + '\'' +
                 ", itemImageUrl='" + itemImageUrl + '\'' +
-                ", genre=" + genre +
+                ", genre=" + genre_id +
                 '}';
     }
 }

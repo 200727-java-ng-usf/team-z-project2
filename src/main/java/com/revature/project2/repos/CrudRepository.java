@@ -1,22 +1,20 @@
 package com.revature.project2.repos;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 public interface CrudRepository<T> {
 
     // Comment
 
-    Optional<T> save (T t);
+    T save (T t);
 
-    Optional<T> findById (Integer id);
+    T findById (Integer id);
 
     List<T> findAll ();
 
-    boolean update (T t);
+    boolean update (T updateObj);
 
-    boolean delete (T t);
+    boolean deleteById (Integer id);
 
 
 }

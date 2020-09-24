@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.hibernate5.SpringSessionContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -21,43 +20,41 @@ import java.util.Properties;
 @Configuration
 @ComponentScan
 @EnableTransactionManagement
-@PropertySource("classpath:application.properties")
 public class AppConfig {
 
-    @Value("${db.driver}")
+
+
+    @Value("org.postgresql.Driver")
     private String dbDriver;
 
-    @Value("${db.url}")
+    @Value("jdbc:postgresql://java-ng-usf-200727.cwdevtt9ruq7.us-east-2.rds.amazonaws.com:5432/postgres")
     private String dbUrl;
 
-    @Value("${db.schema}")
+    @Value("public")
     private String dbSchema;
 
-    @Value("${db.username}")
+    @Value("postgres")
     private String dbUsername;
 
-    @Value("${db.password}")
+    @Value("fake-password")
     private String dbPassword;
 
     @Bean
     public BasicDataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-
         dataSource.setDriverClassName(dbDriver);
         dataSource.setUrl(dbUrl);
         dataSource.setDefaultSchema(dbSchema);
         dataSource.setUsername(dbUsername);
         dataSource.setPassword(dbPassword);
-
         return dataSource;
-
     }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.revature.project2");
+        sessionFactory.setPackagesToScan("com.revature.project2.models");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -69,13 +66,13 @@ public class AppConfig {
         return transactionManager;
     }
 
-    private Properties hibernateProperties() {
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL95Dialect");
-        hibernateProperties.setProperty(Environment.SHOW_SQL, "true");
-        hibernateProperties.setProperty(Environment.FORMAT_SQL, "true");
-        hibernateProperties.setProperty(Environment.HBM2DDL_AUTO, "create");
-        return hibernateProperties;
+    private final Properties hibernateProperties() {
+        Properties hibernateProps = new Properties();
+        hibernateProps.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL95Dialect");
+        hibernateProps.setProperty(Environment.SHOW_SQL, "true");
+        hibernateProps.setProperty(Environment.FORMAT_SQL, "true");
+        hibernateProps.setProperty(Environment.HBM2DDL_AUTO, "create");
+        return hibernateProps;
     }
 
 }
