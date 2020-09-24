@@ -1,38 +1,45 @@
 package com.revature.project2.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-public class OrderedItems {
+public class OrderedItem {
 
+    @Id
+    @Column
     private Integer id;
 
-    private Integer userOrderId;
+    @ManyToOne // many ordered items to one order
+    @JoinColumn // will reference primary key in orders table
+    private Order order;
 
-    private Integer itemId;
+    @ManyToOne // Many ordered items to one item
+    @JoinColumn // will reference primary key in items table
+    private Item item;
 
     // no-args constructor
-    public OrderedItems () { super(); }
+    public OrderedItem() { super(); }
 
     // constructor without ID
-    public OrderedItems (Integer userOrderId, Integer itemId) {
+    public OrderedItem(Order order, Item item) {
 
-        this.userOrderId = userOrderId;
-        this.itemId = itemId;
+        this.order = order;
+        this.item = item;
 
     }
 
     // full constructor
-    public OrderedItems (Integer id, Integer userOrderId, Integer itemId) {
+    public OrderedItem(Integer id, Order order, Item item) {
 
-        this (userOrderId, itemId);
+        this (order, item);
         this.id = id;
 
     }
 
     // copy constructor
-    public OrderedItems (OrderedItems copy) {
+    public OrderedItem(OrderedItem copy) {
 
-        this (copy.id, copy.userOrderId, copy.itemId);
+        this (copy.id, copy.order, copy.item);
 
     }
 
@@ -44,43 +51,43 @@ public class OrderedItems {
         this.id = id;
     }
 
-    public Integer getUserOrderId() {
-        return userOrderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setUserOrderId(Integer userOrderId) {
-        this.userOrderId = userOrderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Integer getItemId() {
-        return itemId;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItemId(Integer itemId) {
-        this.itemId = itemId;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderedItems that = (OrderedItems) o;
+        OrderedItem that = (OrderedItem) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(userOrderId, that.userOrderId) &&
-                Objects.equals(itemId, that.itemId);
+                Objects.equals(order, that.order) &&
+                Objects.equals(item, that.item);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userOrderId, itemId);
+        return Objects.hash(id, order, item);
     }
 
     @Override
     public String toString() {
         return "OrderedItems{" +
                 "id=" + id +
-                ", userOrderId=" + userOrderId +
-                ", itemId=" + itemId +
+                ", order=" + order +
+                ", item=" + item +
                 '}';
     }
 }
