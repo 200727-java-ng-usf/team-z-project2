@@ -71,10 +71,10 @@ public class AppConfig {
 
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialest.PostgreSQL95Dialect");
+        hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL95Dialect");
         hibernateProperties.setProperty(Environment.SHOW_SQL, "true");
         hibernateProperties.setProperty(Environment.FORMAT_SQL, "true");
-        hibernateProperties.setProperty(Environment.HBM2DDL_AUTO, "validate");
+        hibernateProperties.setProperty(Environment.HBM2DDL_AUTO, "create");
         return hibernateProperties;
     }
 
