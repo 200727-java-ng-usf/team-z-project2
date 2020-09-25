@@ -40,14 +40,18 @@ public class ItemController {
 //    public Item getItemById (@PathVariable int id) { return itemService.findById(id); }
 
     // UPDATE operation
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @PutMapping(value="id/{id}")
-//    public Item updateItem (@PathVariable int id) { itemService.update(id); }
-
-    // DELETE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
+//    @PutMapping
+//    public void updateItem (@RequestBody Item updatedItem) {
+//
+//        itemService.update(updatedItem); // need to change service-layer method to return void instead of boolean
+//
+//    }
+//
+//    // DELETE operation
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    @DeleteMapping(value="id/{id}")
-//    public Item deleteItem (@PathVariable int id) { itemService.delete(id); }
+//    public void deleteItem (@PathVariable int id) { itemService.deleteById(id); }
 
 
 }

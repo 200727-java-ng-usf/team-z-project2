@@ -38,15 +38,19 @@ public class OrderController {
         return orderService.findAll();
     }
 
-    // UPDATE operation
+//    // UPDATE operation
 //    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
-//    @PutMapping(value="id/{id}")
-//    public void updateOrder (@PathVariable int id) { orderService.update(id); }
-
-    // DELETE operation
-//    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
+//    @PutMapping
+//    public void updateOrder (@RequestBody Order updatedOrder) {
+//
+//        orderService.update(updatedOrder); // need to change service-layer method to return void instead of boolean
+//
+//    }
+//
+//    // DELETE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
 //    @DeleteMapping(value="id/{id}")
-//    public void deleteOrder (@PathVariable int id) { orderService.delete(id); }
+//    public void deleteOrder (@PathVariable int id) { orderService.deleteById(id); }
 
 
 }

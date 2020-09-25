@@ -33,16 +33,20 @@ public class OrderedItemController {
     // READ operation
     // specify value param so that /users get request is not ambiguous
 //    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public User getOrderedItemById (@PathVariable int id) { return orderedItemService.findById(id); }
+//    public OrderedItem getOrderedItemById (@PathVariable int id) { return orderedItemService.findById(id); }
 
-    // UPDATE operation
+//    // UPDATE operation
 //    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
-//    @PutMapping(value = "id/{id}")
-//    public void updateOrderedItem (@PathVariable int id) { orderedItemService.update(id); }
-
-    // DELETE operation
-//    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
-//    @DeleteMapping(value = "id/{id}")
-//    public void deleteOrderedItem (@PathVariable int id) { orderedItemService.delete(id); }
+//    @PutMapping
+//    public void updateOrderedItem (@RequestBody OrderedItem updatedOrderedItem) {
+//
+//        orderedItemService.update(updatedOrderedItem); // need to change service-layer method to return void instead of boolean
+//
+//    }
+//
+//    // DELETE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @DeleteMapping(value="id/{id}")
+//    public void deleteOrderedItem (@PathVariable int id) { orderedItemService.deleteById(id); }
 
 }
