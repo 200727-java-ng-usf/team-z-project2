@@ -35,4 +35,14 @@ public class OrderedItemController {
 //    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public User getOrderedItemById (@PathVariable int id) { return orderedItemService.findById(id); }
 
+    // UPDATE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
+//    @PutMapping(value = "id/{id}")
+//    public void updateOrderedItem (@PathVariable int id) { orderedItemService.update(id); }
+
+    // DELETE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
+//    @DeleteMapping(value = "id/{id}")
+//    public void deleteOrderedItem (@PathVariable int id) { orderedItemService.delete(id); }
+
 }
