@@ -16,24 +16,30 @@ public class UserController {
 
     private UserService userService;
 
+    // constructor dependency injection
     @Autowired // don't need this annotation for constructor-injection
     public UserController (UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE) // good practice to always include this even though it is set to JSON by default
-    public List<User> getAllUsers() {
-        return userService.findAll();
-    }
-
-    // specify value param so that /users get request is not ambiguous
-    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getUserById (@PathVariable int id) { return userService.findById(id); }
-
+    // CREATE operation
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
     public User registerNewUser(@RequestBody User newUser) {
         return userService.save(newUser);
     }
+
+    // READ operation
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE) // good practice to always include this even though it is set to JSON by default
+    public List<User> getAllUsers() {
+        return userService.findAll();
+    }
+
+    // READ operation
+    // specify value param so that /users get request is not ambiguous
+    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getUserById (@PathVariable int id) { return userService.findById(id); }
+
+
 
 }
