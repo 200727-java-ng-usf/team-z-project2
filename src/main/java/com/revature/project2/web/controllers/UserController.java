@@ -40,8 +40,6 @@ public class UserController {
     @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public User getUserById (@PathVariable int id) { return userService.findById(id); }
 
-    // return void send back 204 no content
-    // void return type on backend but send back 204 bc Service method should return void
     // boolean from repo layer to do validation in service layer, then do validation in service layer, but
     // returns void, not boolean
 
@@ -53,6 +51,7 @@ public class UserController {
         userService.update(updatedUser); // need to change service-layer method to return void instead of boolean
 
     }
+
 
     // DELETE operation
     @ResponseStatus(HttpStatus.NO_CONTENT)
