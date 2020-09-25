@@ -22,7 +22,7 @@ public class ItemController {
     public ItemController (ItemService itemService) { this.itemService = itemService; }
 
     // CREATE operation
-    @ResponseStatus(HttpStatus.CREATED)
+//    @ResponseStatus(HttpStatus.CREATED)
 //    @PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
 //    public Item registerNewItem(@RequestBody Item newItem) {
 //        return itemService.save(newItem);
@@ -38,6 +38,16 @@ public class ItemController {
     // specify value param so that /items get request is not ambiguous
 //    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public Item getItemById (@PathVariable int id) { return itemService.findById(id); }
+
+    // UPDATE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @PutMapping(value="id/{id}")
+//    public Item updateItem (@PathVariable int id) { itemService.update(id); }
+
+    // DELETE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @DeleteMapping(value="id/{id}")
+//    public Item deleteItem (@PathVariable int id) { itemService.delete(id); }
 
 
 }
