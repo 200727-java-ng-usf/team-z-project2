@@ -20,8 +20,12 @@ public class ItemRepository implements CrudRepository<Item> {
 
     // Comment
     @Override
-    public Optional<Item> save(Item item) {
-        return null;
+    public Optional<Item> save(Item newItem) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.save(newItem);
+        return Optional.of(newItem);
+
     }
 
     @Override

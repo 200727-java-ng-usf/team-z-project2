@@ -1,5 +1,6 @@
 package com.revature.project2.repos;
 
+import com.revature.project2.models.Role;
 import com.revature.project2.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -109,4 +110,23 @@ public class UserRepository implements CrudRepository<User> {
                 .getResultList()
                 .stream().findFirst().isPresent();
     }
+
+    public Optional<User> findUserByUsername(String username){
+            Session session = sessionFactory.getCurrentSession();
+            return session.createQuery("from User u where u.username = :un", User.class)
+                    .setParameter("un", username)
+                    .getResultList()
+                    .stream().findFirst();
+        }
+
+    public List<User> findUsersByRole(Role role) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from User u where u.role = : r",User.class)
+                .setParameter("r",role).getResultList();
+    }
+
+
+
+
 }
+

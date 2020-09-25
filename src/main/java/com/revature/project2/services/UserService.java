@@ -72,4 +72,10 @@ public class UserService {
         return  userRepo.isUsernameValid(username);
     }
 
+    @Transactional
+    public List<User> findUsersByRole(String role) {
+        Role roleEnum = Role.valueOf(role.toUpperCase());
+        return userRepo.findUsersByRole(roleEnum);
+    }
+
 }

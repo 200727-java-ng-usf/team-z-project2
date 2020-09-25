@@ -35,6 +35,8 @@ public class AppDrive {
 //        System.out.println(userService.isEmailValid("eee@gmail"));
 
         System.out.println(userService.isUsernameValid("aaa"));
+        List<User> users = userService.findUsersByRole("user");
+        users.forEach(System.out::println);
 //
 //        User newUser = userService.save(new User("aaa","bbb","ccc","ddd","eee@gmail",Role.USER));
 //        System.out.println(newUser.toString());
