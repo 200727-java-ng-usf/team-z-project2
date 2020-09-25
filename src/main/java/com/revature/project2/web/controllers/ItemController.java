@@ -5,10 +5,9 @@ import com.revature.project2.models.User;
 import com.revature.project2.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
 import java.util.List;
@@ -22,9 +21,23 @@ public class ItemController {
     @Autowired
     public ItemController (ItemService itemService) { this.itemService = itemService; }
 
+    // CREATE operation
+    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+//    public Item registerNewItem(@RequestBody Item newItem) {
+//        return itemService.save(newItem);
+//    }
+
+    // READ operation
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE) // good practice to always include this even though it is set to JSON by default
     public List<Item> getAllItems() {
         return itemService.findAll();
     }
+
+    // READ operation
+    // specify value param so that /items get request is not ambiguous
+//    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public Item getItemById (@PathVariable int id) { return itemService.findById(id); }
+
 
 }
