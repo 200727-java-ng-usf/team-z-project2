@@ -30,18 +30,17 @@ public class AppDrive {
 //        findUser.setEmail("ppp@gmail.com");
 //        userService.update(findUser);
 //        System.out.println(userService.findById(2));
-
 //        userService.deleteById(2);
 
+//        System.out.println(userService.isEmailValid("eee@gmail"));
 
-
-
+        System.out.println(userService.isUsernameValid("aaa"));
 //
 //        User newUser = userService.save(new User("aaa","bbb","ccc","ddd","eee@gmail",Role.USER));
 //        System.out.println(newUser.toString());
 
-        User authUser = userService.findUserByUsernameAndPassword("aaa","bbb");
-        System.out.println("Auth User : " + authUser.toString());
+//        User authUser = userService.findUserByUsernameAndPassword("aaa","bbb");
+//        System.out.println("Auth User : " + authUser.toString());
 
 //        User newUser = userService.findById(1);
 //        newUser.setEmail("ppp@gmail.com");

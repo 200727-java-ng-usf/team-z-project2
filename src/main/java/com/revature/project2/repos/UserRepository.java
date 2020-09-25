@@ -45,10 +45,11 @@ public class UserRepository implements CrudRepository<User> {
 
     public Optional<User> findUserByUsernameAndPassword(String username, String password) {
         Session session = sessionFactory.getCurrentSession();
-        return Optional.of(session.createQuery("from User u where u.username = :un and u.password = :pw", User.class)
+        return session.createQuery("from User u where u.username = :un and u.password = :pw", User.class)
                 .setParameter("un", username)
                 .setParameter("pw", password)
-                .getSingleResult());
+                .getResultList()
+                .stream().findFirst();
     }
 
     @Override
@@ -64,7 +65,6 @@ public class UserRepository implements CrudRepository<User> {
 //        .setParameter("i",updateUser.getRole())
 //        .setParameter("id",updateUser.getId())
 //       .executeUpdate();
-//        session.close();
 
         User target = session.get(User.class,updateUser.getId());
         target.setUsername(updateUser.getUsername());
@@ -92,5 +92,21 @@ public class UserRepository implements CrudRepository<User> {
             }
 
         return  false;
+    }
+
+    public boolean isEmailValid(String email){
+        Session session = sessionFactory.getCurrentSession();
+         return session.createQuery("from User u where u.email = :em ", User.class)
+                .setParameter("em", email)
+                .getResultList()
+                .stream().findFirst().isPresent();
+    }
+
+    public boolean isUsernameValid(String username){
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from User u where u.username = :um ", User.class)
+                .setParameter("um", username)
+                .getResultList()
+                .stream().findFirst().isPresent();
     }
 }

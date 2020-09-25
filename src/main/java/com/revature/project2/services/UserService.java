@@ -62,4 +62,14 @@ public class UserService {
 
     }
 
+    @Transactional
+    public boolean isEmailValid(String email){
+        return userRepo.isEmailValid(email);
+    }
+
+    @Transactional
+    public boolean isUsernameValid(String username){
+        return  userRepo.isUsernameValid(username);
+    }
+
 }
