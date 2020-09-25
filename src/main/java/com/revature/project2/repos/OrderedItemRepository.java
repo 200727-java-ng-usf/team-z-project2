@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -20,12 +21,12 @@ public class OrderedItemRepository implements CrudRepository {
     }
 
     @Override
-    public Object save(Object o) {
+    public Optional<OrderedItem> save(Object o) {
         return null;
     }
 
     @Override
-    public Object findById(Integer id) {
+    public Optional<OrderedItem> findById(Integer id) {
         return null;
     }
 

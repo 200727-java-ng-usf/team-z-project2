@@ -1,5 +1,7 @@
 package com.revature.project2.services;
 
+import com.revature.project2.exceptions.ResourceNotFoundException;
+import com.revature.project2.models.Role;
 import com.revature.project2.models.User;
 import com.revature.project2.repos.UserRepository;
 import org.springframework.stereotype.Component;
@@ -7,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -25,8 +28,21 @@ public class UserService {
         return userRepo.findAll();
     }
 
+    @Transactional(readOnly=true)
+    public User findById(Integer id) {
+        return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @Transactional
+    public User save(User newUser) {
+
+        newUser.setRole(Role.USER);
+
+        userRepo.save(newUser);
+
+        return  newUser;
+    }
 
 
-    // UserService should have all CRUD operations from Service interface AND authentication method
 
 }

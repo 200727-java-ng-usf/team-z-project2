@@ -1,10 +1,7 @@
 package com.revature.project2;
 
 //import com.revature.project2.models.Item;
-import com.revature.project2.models.Item;
-import com.revature.project2.models.Order;
-import com.revature.project2.models.OrderedItem;
-import com.revature.project2.models.User;
+import com.revature.project2.models.*;
 //import com.revature.project2.services.ItemService;
 import com.revature.project2.services.ItemService;
 import com.revature.project2.services.OrderService;
@@ -25,19 +22,27 @@ public class AppDrive {
 
         UserService userService = container.getBean("userService", UserService.class);
         List<User> users = userService.findAll();
+
         users.forEach(System.out::println);
 
-        ItemService itemService = container.getBean("itemService", ItemService.class);
-        List<Item> items = itemService.findAll();
-        items.forEach(System.out::println);
+        User findUser = userService.findById(1);
+        System.out.println(findUser.getUsername());
 
-        OrderService orderService = container.getBean("orderService", OrderService.class);
-        List<Order> orders = orderService.findAll();
-        orders.forEach(System.out::println);
+        User newUser = userService.save(new User("aaa","bbb","ccc","ddd","eee@gmail",Role.USER));
+        System.out.println(newUser.toString());
 
-        OrderedItemService  orderedItemService = container.getBean("orderedItemService",  OrderedItemService.class);
-        List<OrderedItem> orderedItemList = orderedItemService.findAll();
-        orderedItemList.forEach(System.out::println);
+
+//        ItemService itemService = container.getBean("itemService", ItemService.class);
+//        List<Item> items = itemService.findAll();
+//        items.forEach(System.out::println);
+//
+//        OrderService orderService = container.getBean("orderService", OrderService.class);
+//        List<Order> orders = orderService.findAll();
+//        orders.forEach(System.out::println);
+//
+//        OrderedItemService  orderedItemService = container.getBean("orderedItemService",  OrderedItemService.class);
+//        List<OrderedItem> orderedItemList = orderedItemService.findAll();
+//        orderedItemList.forEach(System.out::println);
 
     }
 }

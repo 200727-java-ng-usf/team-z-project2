@@ -1,12 +1,14 @@
 package com.revature.project2.repos;
 
 import com.revature.project2.models.Item;
+import com.revature.project2.models.OrderedItem;
 import com.revature.project2.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ItemRepository implements CrudRepository<Item> {
@@ -18,12 +20,12 @@ public class ItemRepository implements CrudRepository<Item> {
 
     // Comment
     @Override
-    public Item save(Item item) {
+    public Optional<Item> save(Item item) {
         return null;
     }
 
     @Override
-    public Item findById(Integer id) {
+    public Optional<Item> findById(Integer id) {
         return null;
     }
 
