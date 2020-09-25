@@ -21,15 +21,33 @@ public class AppDrive {
         container.registerShutdownHook();
 
         UserService userService = container.getBean("userService", UserService.class);
-        List<User> users = userService.findAll();
+//        List<User> users = userService.findAll();
+//
+//        users.forEach(System.out::println);
+//
+//        User findUser = userService.findById(2);
+//        System.out.println(findUser.getUsername());
+//        findUser.setEmail("ppp@gmail.com");
+//        userService.update(findUser);
+//        System.out.println(userService.findById(2));
 
-        users.forEach(System.out::println);
+//        userService.deleteById(2);
 
-        User findUser = userService.findById(1);
-        System.out.println(findUser.getUsername());
 
-        User newUser = userService.save(new User("aaa","bbb","ccc","ddd","eee@gmail",Role.USER));
-        System.out.println(newUser.toString());
+
+
+//
+//        User newUser = userService.save(new User("aaa","bbb","ccc","ddd","eee@gmail",Role.USER));
+//        System.out.println(newUser.toString());
+
+        User authUser = userService.findUserByUsernameAndPassword("aaa","bbb");
+        System.out.println("Auth User : " + authUser.toString());
+
+//        User newUser = userService.findById(1);
+//        newUser.setEmail("ppp@gmail.com");
+//        userService.update(newUser);
+//        User newUser2 = userService.findById(2);
+//        System.out.println(newUser2.toString());
 
 
 //        ItemService itemService = container.getBean("itemService", ItemService.class);

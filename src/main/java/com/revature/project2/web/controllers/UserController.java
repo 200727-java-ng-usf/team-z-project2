@@ -41,19 +41,23 @@ public class UserController {
     public User getUserById (@PathVariable int id) { return userService.findById(id); }
 
     // return void send back 204 no content
-    // void return type on backend but 204 that you send back
+    // void return type on backend but send back 204 bc Service method should return void
     // boolean from repo layer to do validation in service layer, then do validation in service layer, but
     // returns void, not boolean
 
     // UPDATE operation
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @PutMapping(value="id/{id}")
-//    public void updateUser (@PathVariable int id) { userService.update(id); }
+    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
+    @PutMapping
+    public void updateUser (@RequestBody User updatedUser) {
+
+        userService.update(updatedUser); // need to change service-layer method to return void instead of boolean
+
+    }
 
     // DELETE operation
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @DeleteMapping(value="id/{id}")
-//    public void deleteUser (@PathVariable int id) { userService.delete(id); }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(value="id/{id}")
+    public void deleteUser (@PathVariable int id) { userService.deleteById(id); }
 
 
 }
