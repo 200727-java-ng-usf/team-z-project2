@@ -4,6 +4,7 @@ import com.revature.project2.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -44,7 +45,7 @@ public class UserRepository implements CrudRepository<User> {
 
     public Optional<User> findUserByUsernameAndPassword(String username, String password) {
         Session session = sessionFactory.getCurrentSession();
-        return Optional.of(session.createQuery("from User u where u.username = :un and au.password = :pw", User.class)
+        return Optional.of(session.createQuery("from User u where u.username = :un and u.password = :pw", User.class)
                 .setParameter("un", username)
                 .setParameter("pw", password)
                 .getSingleResult());
@@ -52,55 +53,44 @@ public class UserRepository implements CrudRepository<User> {
 
     @Override
     public boolean update(User updateUser) {
+        Session session = sessionFactory.getCurrentSession();
+//        String hql = "update User u set u.username=:un,u.password=:pw,u.firstName=:fn,u.lastName=:ln,u.email=:e,u.role=:i where u.id= :id ";
+//        session.createQuery(hql,User.class)
+//                .setParameter("un",updateUser.getUsername())
+//        .setParameter("pw",updateUser.getPassword())
+//        .setParameter("fn",updateUser.getFirstName())
+//        .setParameter("ln",updateUser.getLastName())
+//        .setParameter("e",updateUser.getEmail())
+//        .setParameter("i",updateUser.getRole())
+//        .setParameter("id",updateUser.getId())
+//       .executeUpdate();
+//        session.close();
 
-        if(updateUser==null) return false;
-
-        Transaction transaction = null;
-        try(Session session = sessionFactory.getCurrentSession()){
-            transaction = session.beginTransaction();
-            User targetUser = session.get(User.class,updateUser.getId());
-
-            if(targetUser==null){
-                return false;
-            }
-            targetUser.setEmail(updateUser.getEmail());
-            targetUser.setPassword(updateUser.getPassword());
-            targetUser.setFirstName(updateUser.getFirstName());
-            targetUser.setLastName(updateUser.getLastName());
-            targetUser.setRole(updateUser.getRole());
-
-            session.update(targetUser);
-            transaction.commit();
-        }catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return true;
-
+        User target = session.get(User.class,updateUser.getId());
+        target.setUsername(updateUser.getUsername());
+        target.setEmail(updateUser.getEmail());
+        target.setFirstName(updateUser.getFirstName());
+        target.setLastName(updateUser.getLastName());
+        target.setPassword(updateUser.getPassword());
+        target.setRole(updateUser.getRole());
+        if(updateUser==null && target ==null){
+            return false;
+        }else
+        return  true;
     }
 
     @Override
     public boolean deleteById(Integer id) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.getCurrentSession()) {
-            // start a transaction
-            transaction = session.beginTransaction();
+
+        Session session = sessionFactory.getCurrentSession();
 
             // Delete a persistent object
-            User targetUser = session.get(User.class, id);
+        User targetUser = session.get(User.class, id);
             if (targetUser != null) {
                 session.delete(targetUser);
                 return true;
             }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+
         return  false;
     }
 }

@@ -43,6 +43,23 @@ public class UserService {
         return  newUser;
     }
 
+    @Transactional
+    public boolean update(User updateUser){
+        if(updateUser==null){
+            return false;
+        }
+        return userRepo.update(updateUser);
+    }
 
+    @Transactional
+    public boolean deleteById(Integer id) {
+        return userRepo.deleteById(id);
+    }
+    @Transactional
+    public User findUserByUsernameAndPassword(String username, String password) {
+
+        return userRepo.findUserByUsernameAndPassword(username,password).orElseThrow(ResourceNotFoundException::new);
+
+    }
 
 }
