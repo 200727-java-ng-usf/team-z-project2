@@ -38,4 +38,15 @@ public class OrderController {
         return orderService.findAll();
     }
 
+    // UPDATE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
+//    @PutMapping(value="id/{id}")
+//    public void updateOrder (@PathVariable int id) { orderService.update(id); }
+
+    // DELETE operation
+//    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
+//    @DeleteMapping(value="id/{id}")
+//    public void deleteOrder (@PathVariable int id) { orderService.delete(id); }
+
+
 }
