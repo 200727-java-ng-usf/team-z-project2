@@ -77,7 +77,7 @@ public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
         hibernateProps.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL95Dialect");
         hibernateProps.setProperty(Environment.SHOW_SQL, "true");
         hibernateProps.setProperty(Environment.FORMAT_SQL, "true");
-        hibernateProps.setProperty(Environment.HBM2DDL_AUTO, "create");
+        hibernateProps.setProperty(Environment.HBM2DDL_AUTO, "validate");
         return hibernateProps;
     }
 
