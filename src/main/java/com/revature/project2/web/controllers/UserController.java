@@ -26,5 +26,14 @@ public class UserController {
         return userService.findAll();
     }
 
+    // specify value param so that /users get request is not ambiguous
+    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getUserById (@PathVariable int id) { return userService.findById(id); }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+    public User registerNewUser(@RequestBody User newUser) {
+        return userService.save(newUser);
+    }
 
 }
