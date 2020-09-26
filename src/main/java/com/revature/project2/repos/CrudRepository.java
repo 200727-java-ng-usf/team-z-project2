@@ -2,7 +2,6 @@ package com.revature.project2.repos;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface CrudRepository<T> {
 
@@ -14,9 +13,9 @@ public interface CrudRepository<T> {
 
     List<T> findAll ();
 
-    boolean update (T t);
+    boolean update (T updateObj);
 
-    boolean delete (T t);
+    boolean deleteById (Integer id);
 
 
 }
