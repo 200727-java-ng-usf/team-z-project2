@@ -26,12 +26,12 @@ public class AuthController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void invalidateSession (HttpServletRequest req) {req.getSession().invalidate(); }
 
-//    @PostMapping (produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public Principal authenticate (@RequestBody Credentials creds, HttpServletRequest req) throws JsonProcessingException {
-//        Principal payload = userService.authenticate(creds);
-//        HttpSession userSession = req.getSession();
-//        userSession.setAttribute("principal", payload);
-//        return payload;
-//    }
+    @PostMapping (produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Principal authenticate (@RequestBody Credentials creds, HttpServletRequest req) throws JsonProcessingException {
+        Principal payload = userService.authenticate(creds);
+        HttpSession userSession = req.getSession();
+        userSession.setAttribute("principal", payload);
+        return payload;
+    }
 
 }
