@@ -1,7 +1,6 @@
 package com.revature.project2.models;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -11,13 +10,14 @@ public class Order {
 
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
     private Timestamp timeCreated;
 
-    @ManyToOne // many orders to one user. References mall_users
-    @JoinColumn // specify what to join?
+    @ManyToOne (fetch = FetchType.LAZY)// many orders to one user. References mall_users
+    @JoinColumn(name = "user_id")// specify what to join?
     private User user; // change this to User
     // will refer to primary key in user table if changed to User
 
@@ -28,10 +28,10 @@ public class Order {
     private Double price;
 
     // no-args constructor
-    public Order () { super(); }
+    public Order() { super(); }
 
     // constructor without ID
-    public Order (Timestamp timeCreated, User user, Integer itemCount, Double price) {
+    public Order(Timestamp timeCreated, User user, Integer itemCount, Double price) {
 
         this.timeCreated = timeCreated;
         this.user = user;
@@ -41,7 +41,7 @@ public class Order {
     }
 
     // full constructor
-    public Order (Integer id, Timestamp timeCreated, User user, Integer itemCount, Double price) {
+    public Order(Integer id, Timestamp timeCreated, User user, Integer itemCount, Double price) {
 
         this (timeCreated, user, itemCount, price);
         this.id = id;
@@ -49,7 +49,7 @@ public class Order {
     }
 
     // copy constructor
-    public Order (Order copy) {
+    public Order(Order copy) {
         this (copy.id, copy.timeCreated, copy.user, copy.itemCount, copy.price);
     }
 
