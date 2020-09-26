@@ -20,11 +20,11 @@ public class OrderedItemController {
     public OrderedItemController (OrderedItemService orderedItemService) { this.orderedItemService = orderedItemService; }
 
     // CREATE operation
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
-//    public OrderedItem registerNewOrderedItem (@RequestBody OrderedItem newOrderedItem) {
-//        return orderedItemService.save(newOrderedItem);
-//    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(produces=MediaType.APPLICATION_JSON_VALUE, consumes=MediaType.APPLICATION_JSON_VALUE)
+    public OrderedItem registerNewOrderedItem (@RequestBody OrderedItem newOrderedItem) {
+        return orderedItemService.save(newOrderedItem);
+    }
 
     // READ operation
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,22 +32,22 @@ public class OrderedItemController {
 
     // READ operation
     // specify value param so that /users get request is not ambiguous
-//    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public OrderedItem getOrderedItemById (@PathVariable int id) { return orderedItemService.findById(id); }
+    @GetMapping(value="id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public OrderedItem getOrderedItemById (@PathVariable int id) { return orderedItemService.findById(id); }
 
-//    // UPDATE operation
-//    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
-//    @PutMapping
-//    public void updateOrderedItem (@RequestBody OrderedItem updatedOrderedItem) {
-//
-//        orderedItemService.update(updatedOrderedItem); // need to change service-layer method to return void instead of boolean
-//
-//    }
-//
-//    // DELETE operation
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @DeleteMapping(value="id/{id}")
-//    public void deleteOrderedItem (@PathVariable int id) { orderedItemService.deleteById(id); }
+    // UPDATE operation
+    @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
+    @PutMapping
+    public void updateOrderedItem (@RequestBody OrderedItem updatedOrderedItem) {
+
+        orderedItemService.update(updatedOrderedItem); // need to change service-layer method to return void instead of boolean
+
+    }
+
+    // DELETE operation
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(value="id/{id}")
+    public void deleteOrderedItem (@PathVariable int id) { orderedItemService.deleteById(id); }
 
 
 }
