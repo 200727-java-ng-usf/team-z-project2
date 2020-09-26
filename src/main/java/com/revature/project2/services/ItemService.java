@@ -1,40 +1,48 @@
 package com.revature.project2.services;
 
 import com.revature.project2.models.Item;
+import com.revature.project2.repos.ItemRepository;
+import com.revature.project2.repos.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
-public class ItemService implements Service<Item> {
+@Service
+public class ItemService {
 
-    // Comment
+    private ItemRepository itemRepo;
 
-    public ItemService() {
-        System.out.println("ItemService constructor");
+    @Autowired
+    public ItemService(ItemRepository repo) {
+        itemRepo = repo;
     }
 
-
-    @Override
-    public Item save(Item item) {
-        return null;
+    @Transactional
+    public Optional<Item> save(Item item) {
+        return itemRepo.save(item);
     }
 
-    @Override
-    public Item findById(Integer id) {
-        return null;
+    @Transactional(readOnly = true)
+    public Optional<Item> findById(Integer id) {
+        return itemRepo.findById(id);
     }
 
-    @Override
-    public Set<Item> findAll() {
-        return null;
+    @Transactional(readOnly = true)
+    public List<Item> findAll() {
+        return itemRepo.findAll();
     }
 
-    @Override
+    @Transactional
     public boolean update(Item item) {
-        return false;
+        return itemRepo.update(item);
     }
 
-    @Override
+    @Transactional
     public boolean delete(Item item) {
-        return false;
+        return itemRepo.delete(item);
     }
 }

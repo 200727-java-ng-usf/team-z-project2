@@ -1,25 +1,27 @@
 package com.revature.project2.repos;
 
 import com.revature.project2.models.OrderedItem;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
+@Repository
 public class OrderedItemRepository implements CrudRepository<OrderedItem>  {
 
-    // Comment
-
     @Override
-    public OrderedItem save(OrderedItem orderedItem) {
-        return null;
+    public Optional<OrderedItem> save(OrderedItem orderedItem) {
+        return Optional.empty();
     }
 
     @Override
-    public OrderedItem findById(Integer id) {
-        return null;
+    public Optional<OrderedItem> findById(Integer id) {
+        return Optional.empty();
     }
 
     @Override
-    public Set<OrderedItem> findAll() {
+    public List<OrderedItem> findAll() {
         return null;
     }
 

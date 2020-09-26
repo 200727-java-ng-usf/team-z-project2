@@ -1,24 +1,28 @@
 package com.revature.project2.repos;
 
 import com.revature.project2.models.Item;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
+@Repository
 public class ItemRepository implements CrudRepository<Item> {
 
-    // Comment
+
     @Override
-    public Item save(Item item) {
+    public Optional<Item> save(Item item) {
         return null;
     }
 
     @Override
-    public Item findById(Integer id) {
+    public Optional<Item> findById(Integer id) {
         return null;
     }
 
     @Override
-    public Set<Item> findAll() {
+    public List<Item> findAll() {
         return null;
     }
 

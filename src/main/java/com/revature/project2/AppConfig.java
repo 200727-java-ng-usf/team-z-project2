@@ -1,6 +1,7 @@
 package com.revature.project2;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.SpringSessionContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -19,46 +21,33 @@ import java.util.Properties;
 @Configuration
 @ComponentScan
 @EnableTransactionManagement
-@PropertySource("application.properties")
+@PropertySource("classpath:application.properties")
 public class AppConfig {
 
-    // Comment
-
-    @Value("${dbDriver}")
+    @Value("${db.driver}")
     private String dbDriver;
 
-    @Value("${dbUrl}")
+    @Value("${db.url}")
     private String dbUrl;
 
-    @Value("${dbSchema}")
+    @Value("${db.schema}")
     private String dbSchema;
 
-    @Value("${dbUsername}")
+    @Value("${db.username}")
     private String dbUsername;
 
-    @Value("${dbPassword}")
+    @Value("${db.password}")
     private String dbPassword;
 
     @Bean
     public BasicDataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream dbPropertiesStream = classLoader.getResourceAsStream("application.properties");
-        Properties dbProperties = new Properties();
-
-        try {
-            dbProperties.load(dbPropertiesStream);
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-
-        dataSource.setDriverClassName(dbProperties.getProperty("driver"));
-        dataSource.setUrl(dbProperties.getProperty("url"));
-        dataSource.setUsername(dbProperties.getProperty("username"));
-        dataSource.setPassword(dbProperties.getProperty("password"));
+        dataSource.setDriverClassName(dbDriver);
+        dataSource.setUrl(dbUrl);
+        dataSource.setDefaultSchema(dbSchema);
+        dataSource.setUsername(dbUsername);
+        dataSource.setPassword(dbPassword);
 
         return dataSource;
 
@@ -80,12 +69,12 @@ public class AppConfig {
         return transactionManager;
     }
 
-    private final Properties hibernateProperties() {
+    private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialest.Oracle10gDialect");
-        hibernateProperties.setProperty("hibernate.show_sql", "true");
-        hibernateProperties.setProperty("hibernate.format_sql", "true");
-        hibernateProperties.setProperty("hibernate.hbmddl.auto", "validate");
+        hibernateProperties.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL95Dialect");
+        hibernateProperties.setProperty(Environment.SHOW_SQL, "true");
+        hibernateProperties.setProperty(Environment.FORMAT_SQL, "true");
+        hibernateProperties.setProperty(Environment.HBM2DDL_AUTO, "create");
         return hibernateProperties;
     }
 
