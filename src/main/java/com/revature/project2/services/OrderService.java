@@ -1,48 +1,62 @@
 package com.revature.project2.services;
 
+import com.revature.project2.exceptions.ResourceNotFoundException;
+import com.revature.project2.models.Item;
 import com.revature.project2.models.Order;
+import com.revature.project2.models.User;
 import com.revature.project2.repos.ItemRepository;
 import com.revature.project2.repos.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 @Service
 public class OrderService {
 
-    private OrderRepository orderRepo;
+    OrderRepository orderRepo;
 
     @Autowired
-    public OrderService(OrderRepository repo) {
-        orderRepo = repo;
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepo = orderRepository;
     }
 
-    @Transactional
-    public Optional<Order> save(Order order) {
-        return null;
-    }
 
-    @Transactional(readOnly = true)
-    public Optional<Order> findById(Integer id) {
-        return Optional.empty();
-    }
-
-    @Transactional(readOnly = true)
+    @Transactional(readOnly=true)
     public List<Order> findAll() {
-        return null;
+        return orderRepo.findAll();
     }
 
     @Transactional
-    public boolean update(Order order) {
-        return false;
+    public boolean update(Order updateOrder) {
+        return orderRepo.update(updateOrder);
+    }
+
+
+    @Transactional
+    public Order save(Order newOrder) {
+        newOrder.setTimeCreated(new Timestamp(System.currentTimeMillis()));
+        return orderRepo.save(newOrder).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Transactional
-    public boolean delete(Order order) {
-        return false;
+    public Order findById(Integer id) {
+        return orderRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
+
+    @Transactional
+    public boolean deleteById(Integer id) {
+        return orderRepo.deleteById(id);
+    }
+
+    @Transactional
+    public Order findUserByUser(User user) {
+        return orderRepo.findUserByUser(user).orElseThrow(ResourceNotFoundException::new);
+    }
+
+
 }

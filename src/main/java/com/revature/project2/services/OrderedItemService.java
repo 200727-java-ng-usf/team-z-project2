@@ -1,6 +1,10 @@
 package com.revature.project2.services;
 
+import com.revature.project2.exceptions.ResourceNotFoundException;
+import com.revature.project2.models.Item;
+import com.revature.project2.models.Order;
 import com.revature.project2.models.OrderedItem;
+import com.revature.project2.models.User;
 import com.revature.project2.repos.OrderRepository;
 import com.revature.project2.repos.OrderedItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,40 +13,51 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+
 
 @Service
 public class OrderedItemService {
 
-    private OrderedItemRepository orderedItemRepo;
+    OrderedItemRepository orderedItemRepo;
 
     @Autowired
-    public OrderedItemService(OrderedItemRepository repo) {
-        orderedItemRepo = repo;
+    public OrderedItemService(OrderedItemRepository orderedItemRepo) {
+        this.orderedItemRepo = orderedItemRepo;
     }
 
-    @Transactional
-    public Optional<OrderedItem> save(OrderedItem orderedItem) {
-        return Optional.empty();
-    }
 
-    @Transactional(readOnly = true)
-    public Optional<OrderedItem> findById(Integer id) {
-        return Optional.empty();
-    }
-
-    @Transactional(readOnly = true)
+    @Transactional(readOnly=true)
     public List<OrderedItem> findAll() {
-        return null;
+        return orderedItemRepo.findAll();
+    }
+
+
+    @Transactional
+    public OrderedItem save(OrderedItem newOrderedItem) {
+        return orderedItemRepo.save(newOrderedItem).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Transactional
-    public boolean update(OrderedItem orderedItem) {
-        return false;
+    public OrderedItem findById(Integer id) {
+        return orderedItemRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
     @Transactional
-    public boolean delete(OrderedItem orderedItem) {
-        return false;
+    public List<OrderedItem> findOrderedItemsByItem(Item item) {
+        return orderedItemRepo.findOrderedItemsByItem(item);
     }
+
+
+    @Transactional
+    public boolean update(OrderedItem updateObj) {
+        return orderedItemRepo.update(updateObj);
+    }
+
+    @Transactional
+    public boolean deleteById(Integer id) {
+        return orderedItemRepo.deleteById(id);
+    }
+
+
+
 }
