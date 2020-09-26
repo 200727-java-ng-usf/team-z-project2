@@ -1,7 +1,9 @@
 package com.revature.project2.repos;
 
+import com.revature.project2.models.Item;
 import com.revature.project2.models.Order;
 import com.revature.project2.models.OrderedItem;
+import com.revature.project2.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -11,7 +13,7 @@ import java.util.Optional;
 
 
 @Repository
-public class OrderedItemRepository implements CrudRepository {
+public class OrderedItemRepository implements CrudRepository<OrderedItem> {
 
 
     private SessionFactory sessionFactory;
@@ -21,13 +23,17 @@ public class OrderedItemRepository implements CrudRepository {
     }
 
     @Override
-    public Optional<OrderedItem> save(Object o) {
-        return null;
+    public Optional<OrderedItem> save(OrderedItem newOrderedItem) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(newOrderedItem);
+        return Optional.of(newOrderedItem);
     }
 
     @Override
     public Optional<OrderedItem> findById(Integer id) {
-        return null;
+
+        Session session = sessionFactory.getCurrentSession();
+        return Optional.ofNullable(session.get(OrderedItem.class, id));
     }
 
     @Override
@@ -37,12 +43,38 @@ public class OrderedItemRepository implements CrudRepository {
     }
 
     @Override
-    public boolean update(Object updateObj) {
-        return false;
+    public boolean update(OrderedItem updateObj) {
+
+        Session session = sessionFactory.getCurrentSession();
+        OrderedItem target = session.get(OrderedItem.class,updateObj.getId());
+        target.setItem(updateObj.getItem());
+        target.setOrder(updateObj.getOrder());
+        if(updateObj==null && target ==null){
+            return false;
+        }else
+            return  true;
+
     }
 
     @Override
     public boolean deleteById(Integer id) {
-        return false;
+
+        Session session = sessionFactory.getCurrentSession();
+
+        // Delete a persistent object
+        OrderedItem targetOrder = session.get(OrderedItem.class, id);
+        if (targetOrder != null) {
+            session.delete(targetOrder);
+            return true;
+        }
+        return  false;
     }
+
+    public List<OrderedItem> findOrderedItemsByItem(Item item) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from OrderedItem o where o.item = :i", OrderedItem.class)
+                .setParameter("i", item)
+                .getResultList();
+    }
+
 }

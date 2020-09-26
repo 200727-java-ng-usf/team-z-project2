@@ -22,7 +22,22 @@ public class AppDrive {
         container.registerShutdownHook();
 
        UserService userService = container.getBean("userService", UserService.class);
-//        List<User> users = userService.findAll();
+        OrderService orderService = container.getBean("orderService", OrderService.class);
+        OrderedItemService  orderedItemService = container.getBean("orderedItemService",  OrderedItemService.class);
+        ItemService itemService = container.getBean("itemService", ItemService.class);
+
+
+       Order order = orderService.findById(1);
+        Item item = itemService.findById(1);
+
+//        List<OrderedItem> orderedItemList = orderedItemService.findOrderedItemsByItem(item);
+//        System.out.println(orderedItemList.get(0).toString());
+//        System.out.println(orderedItemService.findById(1).getOrder().toString());
+
+
+
+
+        //        List<User> users = userService.findAll();
 //
 //        users.forEach(System.out::println);
 //
@@ -76,16 +91,17 @@ public class AppDrive {
 //       Item newItem = itemService.save(new Item("Gu Hat",3000.00,1,"Design by Gu","null",Genre.valueOf("BASEBALL")));
 //        List<Item> items = itemService.findAll();
 //        items.forEach(System.out::println);
-         OrderService orderService = container.getBean("orderService", OrderService.class);
+
 //
 //          Order order = orderService.findById(1);
 //         System.out.println(order.toString());
 //
 //         order.setPrice(50.0);
 //        System.out.println(orderService.update(order));
-        User user = userService.findById(1);
-        Order userOrder = orderService.findUserByUser(user);
-        System.out.println(userOrder.toString());
+
+
+
+
 
 //        List<Order> orders = orderService.findAll();
 
