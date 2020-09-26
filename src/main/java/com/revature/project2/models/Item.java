@@ -21,7 +21,7 @@ public class Item {
     @Column(name="item_stock", nullable = false)
     private Integer stock;
 
-    @Column(name="decription")
+    @Column(name="description")
     private String description;
 
     @Column(name="item_image_url")
