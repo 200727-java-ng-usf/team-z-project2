@@ -31,9 +31,8 @@ public class Order {
     public Order() { super(); }
 
     // constructor without ID
-    public Order(Timestamp timeCreated, User user, Integer itemCount, Double price) {
+    public Order(User user, Integer itemCount, Double price) {
 
-        this.timeCreated = timeCreated;
         this.user = user;
         this.itemCount = itemCount;
         this.price = price;
@@ -41,16 +40,16 @@ public class Order {
     }
 
     // full constructor
-    public Order(Integer id, Timestamp timeCreated, User user, Integer itemCount, Double price) {
+    public Order(Integer id, User user, Integer itemCount, Double price) {
 
-        this (timeCreated, user, itemCount, price);
+        this (user, itemCount, price);
         this.id = id;
 
     }
 
     // copy constructor
     public Order(Order copy) {
-        this (copy.id, copy.timeCreated, copy.user, copy.itemCount, copy.price);
+        this (copy.id,  copy.user, copy.itemCount, copy.price);
     }
 
     public Integer getId() {
@@ -115,7 +114,7 @@ public class Order {
         return "Order{" +
                 "id=" + id +
                 ", timeCreated=" + timeCreated +
-                ", user=" + user +
+                ", user=" + user.getId() +
                 ", itemCount=" + itemCount +
                 ", price=" + price +
                 '}';

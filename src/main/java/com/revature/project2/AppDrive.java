@@ -21,7 +21,7 @@ public class AppDrive {
         AnnotationConfigApplicationContext container = new AnnotationConfigApplicationContext(AppConfig.class);
         container.registerShutdownHook();
 
-//        UserService userService = container.getBean("userService", UserService.class);
+       UserService userService = container.getBean("userService", UserService.class);
 //        List<User> users = userService.findAll();
 //
 //        users.forEach(System.out::println);
@@ -39,7 +39,7 @@ public class AppDrive {
 //        List<User> users = userService.findUsersByRole("user");
 //        users.forEach(System.out::println);
 //
-//        User newUser = userService.save(new User("aaa","bbb","ccc","ddd","eee@gmail",Role.USER));
+//     User newUser = userService.save(new User("aaa","bbb","ccc","ddd","eee@gmail",Role.USER));
 //        System.out.println(newUser.toString());
 
 //        User authUser = userService.findUserByUsernameAndPassword("aaa","bbb");
@@ -52,7 +52,8 @@ public class AppDrive {
 //        System.out.println(newUser2.toString());
 
 
-        ItemService itemService = container.getBean("itemService", ItemService.class);
+//        ItemService itemService = container.getBean("itemService", ItemService.class);
+//        Item newItem = itemService.save(new Item("Gu Hat",3000.00,1,"Design by Gu","null",Genre.valueOf("BASEBALL")));
 
         //String name, Double price, Integer stock, String description, String itemImageUrl, Integer genre_id
 //        Item targetItem = itemService.findById(2);
@@ -69,15 +70,34 @@ public class AppDrive {
 //        Item item = itemService.findUserByName("Gu Hat");
 //        System.out.println(item.toString());
 
-        System.out.println(itemService.isNameValid("Gu Hat"));
+//   System.out.println(itemService.isNameValid("Gu Hat"));
 
 
-//         Item newItem = itemService.save(new Item("Gu Hat",3000.00,1,"Design by Gu","null",Genre.valueOf("BASEBALL")));
+//       Item newItem = itemService.save(new Item("Gu Hat",3000.00,1,"Design by Gu","null",Genre.valueOf("BASEBALL")));
 //        List<Item> items = itemService.findAll();
 //        items.forEach(System.out::println);
+         OrderService orderService = container.getBean("orderService", OrderService.class);
 //
-//        OrderService orderService = container.getBean("orderService", OrderService.class);
+//          Order order = orderService.findById(1);
+//         System.out.println(order.toString());
+//
+//         order.setPrice(50.0);
+//        System.out.println(orderService.update(order));
+        User user = userService.findById(1);
+        Order userOrder = orderService.findUserByUser(user);
+        System.out.println(userOrder.toString());
+
 //        List<Order> orders = orderService.findAll();
+
+        //User user, Integer itemCount, Double price
+
+//       orderService.save(new Order(newUser,2,40.00));
+
+
+
+
+
+
 //        orders.forEach(System.out::println);
 //
 //        OrderedItemService  orderedItemService = container.getBean("orderedItemService",  OrderedItemService.class);

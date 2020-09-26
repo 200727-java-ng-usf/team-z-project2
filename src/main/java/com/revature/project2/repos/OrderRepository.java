@@ -70,4 +70,11 @@ public class OrderRepository implements CrudRepository<Order> {
 
         return  false;
     }
+
+    public Optional<Order> findUserByUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Order o where o.user = :u", Order.class)
+                .setParameter("u", user)
+                .stream().findFirst();
+    }
 }
