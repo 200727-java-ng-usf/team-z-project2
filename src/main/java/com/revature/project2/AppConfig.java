@@ -27,7 +27,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan
 @EnableTransactionManagement // there are transactional annotations that Spring needs to see. Without this, Spring will ignore them
-@PropertySource("classpath:application.properties")
+//@PropertySource("classpath:application.properties")
 public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
 
     @Value("org.postgresql.Driver")
