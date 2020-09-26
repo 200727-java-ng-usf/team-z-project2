@@ -27,32 +27,32 @@ public class Item {
     @Column(name="item_image_url")
     private String itemImageUrl;
 
-    @Column(name = "genre_id")
-    private Integer genre_id;
+    @Enumerated(EnumType.STRING)
+    private Genre genre;
 
     // no-args constructor
     public Item() { super(); }
 
     // constructor no ID
-    public Item(String name, Double price, Integer stock, String description, String itemImageUrl, Integer genre_id) {
+    public Item(String name, Double price, Integer stock, String description, String itemImageUrl, Genre genre) {
         this.name = name;
         this.price = price;
         this.stock = stock;
         this.description = description;
         this.itemImageUrl = itemImageUrl;
-        this.genre_id = genre_id;
+        this.genre = genre;
     }
 
     // full constructor
-    public Item(Integer id, String name, Double price, Integer stock, String description, String itemImageUrl, Integer genre_id) {
-        this (name, price, stock, description, itemImageUrl, genre_id);
+    public Item(Integer id, String name, Double price, Integer stock, String description, String itemImageUrl, Genre genre) {
+        this (name, price, stock, description, itemImageUrl, genre);
         this.id = id;
     }
 
     // copy constructor
     public Item(Item copy) {
 
-        this (copy.id, copy.name, copy.price, copy.stock, copy.description, copy.itemImageUrl, copy.genre_id);
+        this (copy.id, copy.name, copy.price, copy.stock, copy.description, copy.itemImageUrl, copy.genre);
 
     }
 
@@ -104,12 +104,12 @@ public class Item {
         this.itemImageUrl = itemImageUrl;
     }
 
-    public Integer getGenre() {
-        return genre_id;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenre(Integer genre_id) {
-        this.genre_id = genre_id;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override
@@ -123,13 +123,14 @@ public class Item {
                 Objects.equals(stock, item.stock) &&
                 Objects.equals(description, item.description) &&
                 Objects.equals(itemImageUrl, item.itemImageUrl) &&
-                genre_id == item.genre_id;
+                genre == item.genre;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price, stock, description, itemImageUrl, genre_id);
+        return Objects.hash(id, name, price, stock, description, itemImageUrl, genre);
     }
+
 
     @Override
     public String toString() {
@@ -140,7 +141,7 @@ public class Item {
                 ", stock=" + stock +
                 ", description='" + description + '\'' +
                 ", itemImageUrl='" + itemImageUrl + '\'' +
-                ", genre=" + genre_id +
+                ", genre=" + genre +
                 '}';
     }
 }

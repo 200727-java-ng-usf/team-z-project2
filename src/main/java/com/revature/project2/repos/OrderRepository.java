@@ -3,6 +3,7 @@ package com.revature.project2.repos;
 
 import com.revature.project2.models.Item;
 import com.revature.project2.models.Order;
+import com.revature.project2.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -20,13 +21,18 @@ public class OrderRepository implements CrudRepository<Order> {
     }
 
     @Override
-    public Optional<Order> save(Order order) {
-        return null;
+    public Optional<Order> save(Order newOrder) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.save(newOrder);
+        return Optional.of(newOrder);
     }
 
     @Override
     public Optional<Order> findById(Integer id) {
-        return null;
+
+        Session session = sessionFactory.getCurrentSession();
+        return Optional.ofNullable(session.get(Order.class, id));
     }
 
     @Override
@@ -36,12 +42,32 @@ public class OrderRepository implements CrudRepository<Order> {
     }
 
     @Override
-    public boolean update(Order updateObj) {
-        return false;
+    public boolean update(Order updateOrder) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Order target = session.get(Order.class,updateOrder.getId());
+        target.setItemCount(updateOrder.getItemCount());
+        target.setPrice(updateOrder.getPrice());
+        target.setUser(updateOrder.getUser());
+        if(updateOrder==null && target ==null){
+            return false;
+        }else
+            return  true;
+
     }
 
     @Override
     public boolean deleteById(Integer id) {
-        return false;
+
+        Session session = sessionFactory.getCurrentSession();
+
+        // Delete a persistent object
+        Order targetOrder = session.get(Order.class, id);
+        if (targetOrder != null) {
+            session.delete(targetOrder);
+            return true;
+        }
+
+        return  false;
     }
 }
