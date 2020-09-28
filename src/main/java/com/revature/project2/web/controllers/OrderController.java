@@ -38,6 +38,11 @@ public class OrderController {
         return orderService.findAll();
     }
 
+    @GetMapping(value="user-id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Order> getAllOrdersByUser(@RequestBody User user) {
+        return orderService.findAllByUser(user.getId());
+    }
+
     // UPDATE operation
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204 = No Content
     @PutMapping
