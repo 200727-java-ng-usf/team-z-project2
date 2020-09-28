@@ -32,6 +32,9 @@ public class OrderService {
     }
 
     @Transactional
+    public List<Order> findAllByUser(int id) { return orderRepo.findAllByUser(id); }
+
+    @Transactional
     public boolean update(Order updateOrder) {
         return orderRepo.update(updateOrder);
     }
