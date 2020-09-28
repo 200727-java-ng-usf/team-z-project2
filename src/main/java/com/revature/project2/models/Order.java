@@ -16,7 +16,7 @@ public class Order {
     @Column(nullable = false)
     private Timestamp timeCreated;
 
-    @ManyToOne (fetch = FetchType.LAZY, cascade={
+    @ManyToOne (fetch = FetchType.EAGER, cascade={
             CascadeType.REMOVE, CascadeType.DETACH,
             CascadeType.MERGE, CascadeType.PERSIST
     })// many orders to one user. References mall_users
