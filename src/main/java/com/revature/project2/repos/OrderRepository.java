@@ -4,6 +4,7 @@ package com.revature.project2.repos;
 import com.revature.project2.models.Item;
 import com.revature.project2.models.Order;
 import com.revature.project2.models.User;
+import com.revature.project2.web.dtos.Principal;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -39,6 +40,12 @@ public class OrderRepository implements CrudRepository<Order> {
     public List<Order> findAll() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("from Order", Order.class).getResultList();
+    }
+
+    public List<Order> findAllByUser(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        // select from orders table where user_id = principal.getId();
+        return session.createQuery("from Order where user_id = " + id, Order.class).getResultList();
     }
 
     @Override
