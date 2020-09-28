@@ -16,7 +16,10 @@ public class Order {
     @Column(nullable = false)
     private Timestamp timeCreated;
 
-    @ManyToOne (fetch = FetchType.LAZY)// many orders to one user. References mall_users
+    @ManyToOne (fetch = FetchType.LAZY, cascade={
+            CascadeType.REMOVE, CascadeType.DETACH,
+            CascadeType.MERGE, CascadeType.PERSIST
+    })// many orders to one user. References mall_users
     @JoinColumn(name = "user_id")// specify what to join?
     private User user; // change this to User
     // will refer to primary key in user table if changed to User
