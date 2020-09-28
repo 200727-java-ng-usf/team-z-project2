@@ -36,7 +36,7 @@ public class AppConfig implements WebMvcConfigurer, WebApplicationInitializer {
     @Value("jdbc:postgresql://java-ng-usf-200727.cwdevtt9ruq7.us-east-2.rds.amazonaws.com:5432/postgres")
     private String dbUrl;
 
-    @Value("public")
+    @Value("HatsMall")
     private String dbSchema;
 
     @Value("postgres")
