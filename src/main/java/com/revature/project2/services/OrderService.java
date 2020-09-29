@@ -43,6 +43,7 @@ public class OrderService {
     @Transactional
     public Order save(Order newOrder) {
         newOrder.setTimeCreated(new Timestamp(System.currentTimeMillis()));
+        newOrder.setClosed(false);
         return orderRepo.save(newOrder).orElseThrow(ResourceNotFoundException::new);
     }
 
