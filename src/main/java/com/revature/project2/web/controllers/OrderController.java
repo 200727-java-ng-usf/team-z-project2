@@ -38,9 +38,10 @@ public class OrderController {
         return orderService.findAll();
     }
 
-    @GetMapping(value="user-id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Order> getAllOrdersByUser(@RequestBody User user) {
-        return orderService.findAllByUser(user.getId());
+    @GetMapping(value="userId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Order> getAllOrdersByUser(@PathVariable int id) {
+        System.out.println(id);
+        return orderService.findAllByUser(id);
     }
 
     // UPDATE operation
