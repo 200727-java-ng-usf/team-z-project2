@@ -56,6 +56,7 @@ public class OrderRepository implements CrudRepository<Order> {
         target.setItemCount(updateOrder.getItemCount());
         target.setPrice(updateOrder.getPrice());
         target.setUser(updateOrder.getUser());
+        target.setClosed(updateOrder.isClosed());
         if(updateOrder==null && target ==null){
             return false;
         }else
