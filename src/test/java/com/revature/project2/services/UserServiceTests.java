@@ -59,6 +59,26 @@ public class UserServiceTests {
         // nothing here, because the method should have raised an exception
     }
 
+    @Test
+    public void updateWithNullUserReturnsFalse() {
+        Assert.assertEquals(false, sut.update(null));
+    }
+    
+    @Test (expected = InvalidRequestException.class)
+    public void deleteWithNegativeId() {
+        sut.deleteById(-10);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void findUserByUsernameAndPasswordNull() {
+        sut.findUserByUsernameAndPassword(null, null);
+    }
+
+    @Test (expected = InvalidRequestException.class)
+    public void findByIdNegativeId() {
+        sut.findById(-10);
+    }
+
 
 
 
