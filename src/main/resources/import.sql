@@ -12,8 +12,8 @@ insert into mall_user (username, password, firstName, lastName, email, role) val
 insert into mall_user (username, password, firstName, lastName, email, role) values ( 'Rudolph', 'password', 'Rudolph', 'Smith', 'rudolph@gmail.com', 'INACTIVE');
 
 insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( 'Sunhat 3000', 29.99, 20, 'Keep the sun out of your face!', 'https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_6.jpg', 'SUN');
-insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( "Baseball M Hat", 59.99, 10, "Super cool!", "https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_1.jpg", "BASEBALL");
-insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( "Rodeo Hat", 23.99, 15, "Square dancin!", "https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_2.jpg", "COWBOY");
-insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( "Sherlock Holmes Hat", 39.99, 5, "Limited Edition!", "https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_3.jpg", "BEANIE");
-insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( "Twitches 2.0", 15.99, 30,"Happy Halloween!", "https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_4.jpg", "VISOR");
+insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( 'Baseball M Hat', 59.99, 10, 'Super cool!', 'https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_1.jpg', 'BASEBALL');
+insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( 'Rodeo Hat', 23.99, 15, 'Square dancin!', 'https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_2.jpg', 'COWBOY');
+insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( 'Sherlock Holmes Hat', 39.99, 5, 'Limited Edition!', 'https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_3.jpg', 'BEANIE');
+insert into item_hats (name, price, stock, description, itemImageUrl, genre) values ( 'Twitches 2.0', 15.99, 30,'Happy Halloween!', 'https://200727-java-ng-usf-gu.s3.us-east-2.amazonaws.com/assets/img/hat_4.jpg', 'VISOR');
 
