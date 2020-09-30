@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.internal.matchers.Null;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -45,7 +46,17 @@ public class OrderServiceTests {
     public void registerWithNullObject() { sut.save(null); }
 
     @Test (expected = InvalidRequestException.class)
-    public void getReimbByIdNegativeId() { sut.findById(-30); }
+    public void getOrderByIdNegativeId() { sut.findById(-30); }
+
+    @Test (expected = InvalidRequestException.class)
+    public void getOrdersByUserNegativeUserId() {
+        sut.findAllByUser(-10);
+    }
+
+    @Test (expected = InvalidRequestException.class)
+    public void deleteWithNegativeId() {
+        sut.deleteById(-10);
+    }
 
 
 
