@@ -1,5 +1,6 @@
 package com.revature.project2.services;
 
+import com.revature.project2.exceptions.InvalidRequestException;
 import com.revature.project2.exceptions.ResourceNotFoundException;
 import com.revature.project2.models.Item;
 import com.revature.project2.models.Order;
@@ -25,36 +26,72 @@ public class OrderedItemService {
         this.orderedItemRepo = orderedItemRepo;
     }
 
-
-    @Transactional(readOnly=true)
-    public List<OrderedItem> findAll() {
-        return orderedItemRepo.findAll();
-    }
-
-
+    /**
+     * CREATE operation
+     * @param newOrderedItem
+     * @return
+     */
     @Transactional
     public OrderedItem save(OrderedItem newOrderedItem) {
         return orderedItemRepo.save(newOrderedItem).orElseThrow(ResourceNotFoundException::new);
     }
 
+    /**
+     * READ operation
+     * @return
+     */
+    @Transactional(readOnly=true)
+    public List<OrderedItem> findAll() {
+        return orderedItemRepo.findAll();
+    }
+
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
     @Transactional
     public OrderedItem findById(Integer id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+
         return orderedItemRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
+    /**
+     * READ operation
+     * @param item
+     * @return
+     */
     @Transactional
     public List<OrderedItem> findOrderedItemsByItem(Item item) {
         return orderedItemRepo.findOrderedItemsByItem(item);
     }
 
-
+    /**
+     * UPDATE operation
+     * @param updateObj
+     * @return
+     */
     @Transactional
     public boolean update(OrderedItem updateObj) {
         return orderedItemRepo.update(updateObj);
     }
 
+    /**
+     * DELETE operation
+     * @param id
+     * @return
+     */
     @Transactional
     public boolean deleteById(Integer id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+
         return orderedItemRepo.deleteById(id);
     }
 

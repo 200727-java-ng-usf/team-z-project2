@@ -25,18 +25,11 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-
-
-    @Transactional(readOnly=true)
-    public List<User> findAll() {
-        return userRepo.findAll();
-    }
-
-    @Transactional(readOnly=true)
-    public User findById(Integer id) {
-        return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
-    }
-
+    /**
+     * CREATE operation
+     * @param newUser
+     * @return
+     */
     @Transactional
     public User save(User newUser) {
 
@@ -47,6 +40,48 @@ public class UserService {
         return  newUser;
     }
 
+    /**
+     * READ operation
+     * @return
+     */
+    @Transactional(readOnly=true)
+    public List<User> findAll() {
+        return userRepo.findAll();
+    }
+
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
+    @Transactional(readOnly=true)
+    public User findById(Integer id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+
+        return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    /**
+     * READ operation
+     * @param username
+     * @param password
+     * @return
+     */
+    @Transactional
+    public User findUserByUsernameAndPassword(String username, String password) {
+
+        return userRepo.findUserByUsernameAndPassword(username,password).orElseThrow(ResourceNotFoundException::new);
+
+    }
+
+    /**
+     * UPDATE operation
+     * @param updateUser
+     * @return
+     */
     @Transactional
     public boolean update(User updateUser){
         if(updateUser==null){
@@ -55,17 +90,26 @@ public class UserService {
         return userRepo.update(updateUser);
     }
 
+    /**
+     * DELETE operation
+     * @param id
+     * @return
+     */
     @Transactional
     public boolean deleteById(Integer id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+
         return userRepo.deleteById(id);
     }
-    @Transactional
-    public User findUserByUsernameAndPassword(String username, String password) {
 
-        return userRepo.findUserByUsernameAndPassword(username,password).orElseThrow(ResourceNotFoundException::new);
-
-    }
-
+    /**
+     * CREATE operation (creating a DTO)
+     * @param creds
+     * @return
+     */
     @Transactional
     public Principal authenticate (Credentials creds) {
 

@@ -1,5 +1,6 @@
 package com.revature.project2.services;
 
+import com.revature.project2.exceptions.InvalidRequestException;
 import com.revature.project2.exceptions.ResourceNotFoundException;
 import com.revature.project2.models.Item;
 import com.revature.project2.models.Order;
@@ -25,21 +26,11 @@ public class OrderService {
         this.orderRepo = orderRepository;
     }
 
-
-    @Transactional(readOnly=true)
-    public List<Order> findAll() {
-        return orderRepo.findAll();
-    }
-
-    @Transactional
-    public List<Order> findAllByUser(int id) { return orderRepo.findAllByUser(id); }
-
-    @Transactional
-    public boolean update(Order updateOrder) {
-        return orderRepo.update(updateOrder);
-    }
-
-
+    /**
+     * CREATE operation
+     * @param newOrder
+     * @return
+     */
     @Transactional
     public Order save(Order newOrder) {
         newOrder.setTimeCreated(new Timestamp(System.currentTimeMillis()));
@@ -47,20 +38,80 @@ public class OrderService {
         return orderRepo.save(newOrder).orElseThrow(ResourceNotFoundException::new);
     }
 
+    /**
+     * READ operation
+     * @return
+     */
+    @Transactional(readOnly=true)
+    public List<Order> findAll() {
+        return orderRepo.findAll();
+    }
+
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
     @Transactional
     public Order findById(Integer id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+
         return orderRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
     @Transactional
-    public boolean deleteById(Integer id) {
-        return orderRepo.deleteById(id);
+    public List<Order> findAllByUser(int id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+        return orderRepo.findAllByUser(id);
     }
 
+    /**
+     * READ operation. (What is this?)
+     * @param user
+     * @return
+     */
     @Transactional
     public Order findUserByUser(User user) {
         return orderRepo.findUserByUser(user).orElseThrow(ResourceNotFoundException::new);
     }
+
+    /**
+     * UPDATE operation
+     * @param updateOrder
+     * @return
+     */
+    @Transactional
+    public boolean update(Order updateOrder) {
+        return orderRepo.update(updateOrder);
+    }
+
+    /**
+     * DELETE operation
+     * @param id
+     * @return
+     */
+    @Transactional
+    public boolean deleteById(Integer id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+
+        return orderRepo.deleteById(id);
+    }
+
+
 
 
 }
