@@ -1,9 +1,13 @@
 package com.revature.project2.services;
 
+import com.revature.project2.exceptions.AuthenticationException;
+import com.revature.project2.exceptions.InvalidRequestException;
 import com.revature.project2.exceptions.ResourceNotFoundException;
 import com.revature.project2.models.Role;
 import com.revature.project2.models.User;
 import com.revature.project2.repos.UserRepository;
+import com.revature.project2.web.dtos.Credentials;
+import com.revature.project2.web.dtos.Principal;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
@@ -21,18 +25,11 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-
-
-    @Transactional(readOnly=true)
-    public List<User> findAll() {
-        return userRepo.findAll();
-    }
-
-    @Transactional(readOnly=true)
-    public User findById(Integer id) {
-        return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
-    }
-
+    /**
+     * CREATE operation
+     * @param newUser
+     * @return
+     */
     @Transactional
     public User save(User newUser) {
 
@@ -43,6 +40,48 @@ public class UserService {
         return  newUser;
     }
 
+    /**
+     * READ operation
+     * @return
+     */
+    @Transactional(readOnly=true)
+    public List<User> findAll() {
+        return userRepo.findAll();
+    }
+
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
+    @Transactional(readOnly=true)
+    public User findById(Integer id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+
+        return userRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    /**
+     * READ operation
+     * @param username
+     * @param password
+     * @return
+     */
+    @Transactional
+    public User findUserByUsernameAndPassword(String username, String password) {
+
+        return userRepo.findUserByUsernameAndPassword(username,password).orElseThrow(ResourceNotFoundException::new);
+
+    }
+
+    /**
+     * UPDATE operation
+     * @param updateUser
+     * @return
+     */
     @Transactional
     public boolean update(User updateUser){
         if(updateUser==null){
@@ -51,31 +90,45 @@ public class UserService {
         return userRepo.update(updateUser);
     }
 
+    /**
+     * DELETE operation
+     * @param id
+     * @return
+     */
     @Transactional
     public boolean deleteById(Integer id) {
+
+        if (id <= 0) {
+            throw new InvalidRequestException("ID cannot be negative or equal to zero");
+        }
+
         return userRepo.deleteById(id);
     }
+
+    /**
+     * CREATE operation (creating a DTO)
+     * @param creds
+     * @return
+     */
     @Transactional
-    public User findUserByUsernameAndPassword(String username, String password) {
+    public Principal authenticate (Credentials creds) {
 
-        return userRepo.findUserByUsernameAndPassword(username,password).orElseThrow(ResourceNotFoundException::new);
+        if (creds == null || creds.getUsername() == null || creds.getPassword() == null
+                || creds.getUsername().equals("") || creds.getPassword().equals("")) {
+            throw new InvalidRequestException("Invalid credentials object provided!");
+        }
 
-    }
+        try {
 
-    @Transactional
-    public boolean isEmailValid(String email){
-        return userRepo.isEmailValid(email);
-    }
+            User authUser = userRepo.findUserByUsernameAndPassword(creds.getUsername(), creds.getPassword())
+                    .orElseThrow(AuthenticationException::new);
 
-    @Transactional
-    public boolean isUsernameValid(String username){
-        return  userRepo.isUsernameValid(username);
-    }
+            return new Principal(authUser);
 
-    @Transactional
-    public List<User> findUsersByRole(String role) {
-        Role roleEnum = Role.valueOf(role.toUpperCase());
-        return userRepo.findUsersByRole(roleEnum);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

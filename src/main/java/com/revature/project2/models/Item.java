@@ -21,7 +21,7 @@ public class Item {
     @Column(name="item_stock", nullable = false)
     private Integer stock;
 
-    @Column(name="decription")
+    @Column(name="description")
     private String description;
 
     @Column(name="item_image_url")
@@ -123,14 +123,13 @@ public class Item {
                 Objects.equals(stock, item.stock) &&
                 Objects.equals(description, item.description) &&
                 Objects.equals(itemImageUrl, item.itemImageUrl) &&
-                genre == item.genre;
+                Objects.equals(genre, item.genre);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, name, price, stock, description, itemImageUrl, genre);
     }
-
 
     @Override
     public String toString() {

@@ -1,6 +1,5 @@
 package com.revature.project2.repos;
 
-import com.revature.project2.models.Role;
 import com.revature.project2.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,11 +45,10 @@ public class UserRepository implements CrudRepository<User> {
 
     public Optional<User> findUserByUsernameAndPassword(String username, String password) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from User u where u.username = :un and u.password = :pw", User.class)
+        return Optional.of(session.createQuery("from User u where u.username = :un and u.password = :pw", User.class)
                 .setParameter("un", username)
                 .setParameter("pw", password)
-                .getResultList()
-                .stream().findFirst();
+                .getSingleResult());
     }
 
     @Override
@@ -66,6 +64,7 @@ public class UserRepository implements CrudRepository<User> {
 //        .setParameter("i",updateUser.getRole())
 //        .setParameter("id",updateUser.getId())
 //       .executeUpdate();
+//        session.close();
 
         User target = session.get(User.class,updateUser.getId());
         target.setUsername(updateUser.getUsername());
@@ -94,39 +93,4 @@ public class UserRepository implements CrudRepository<User> {
 
         return  false;
     }
-
-    public boolean isEmailValid(String email){
-        Session session = sessionFactory.getCurrentSession();
-         return session.createQuery("from User u where u.email = :em ", User.class)
-                .setParameter("em", email)
-                .getResultList()
-                .stream().findFirst().isPresent();
-    }
-
-    public boolean isUsernameValid(String username){
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from User u where u.username = :um ", User.class)
-                .setParameter("um", username)
-                .getResultList()
-                .stream().findFirst().isPresent();
-    }
-
-    public Optional<User> findUserByUsername(String username){
-            Session session = sessionFactory.getCurrentSession();
-            return session.createQuery("from User u where u.username = :un", User.class)
-                    .setParameter("un", username)
-                    .getResultList()
-                    .stream().findFirst();
-        }
-
-    public List<User> findUsersByRole(Role role) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from User u where u.role = : r",User.class)
-                .setParameter("r",role).getResultList();
-    }
-
-
-
-
 }
-

@@ -16,7 +16,10 @@ public class Order {
     @Column(nullable = false)
     private Timestamp timeCreated;
 
-    @ManyToOne (fetch = FetchType.LAZY)// many orders to one user. References mall_users
+    @ManyToOne (fetch = FetchType.EAGER, cascade={
+            CascadeType.REMOVE, CascadeType.DETACH,
+            CascadeType.MERGE, CascadeType.PERSIST
+    })// many orders to one user. References mall_users
     @JoinColumn(name = "user_id")// specify what to join?
     private User user; // change this to User
     // will refer to primary key in user table if changed to User
@@ -27,29 +30,34 @@ public class Order {
     @Column(nullable = false)
     private Double price;
 
+    @Column(nullable = false)
+    private boolean closed;
+
     // no-args constructor
     public Order() { super(); }
 
     // constructor without ID
-    public Order(User user, Integer itemCount, Double price) {
+    public Order(Timestamp timeCreated, User user, Integer itemCount, Double price, boolean closed) {
 
+        this.timeCreated = timeCreated;
         this.user = user;
         this.itemCount = itemCount;
         this.price = price;
+        this.closed = closed;
 
     }
 
     // full constructor
-    public Order(Integer id, User user, Integer itemCount, Double price) {
+    public Order(Integer id, Timestamp timeCreated, User user, Integer itemCount, Double price, boolean closed) {
 
-        this (user, itemCount, price);
+        this (timeCreated, user, itemCount, price, closed);
         this.id = id;
 
     }
 
     // copy constructor
     public Order(Order copy) {
-        this (copy.id,  copy.user, copy.itemCount, copy.price);
+        this (copy.id, copy.timeCreated, copy.user, copy.itemCount, copy.price, copy.closed);
     }
 
     public Integer getId() {
@@ -92,12 +100,21 @@ public class Order {
         this.price = price;
     }
 
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) &&
+        return closed == order.closed &&
+                Objects.equals(id, order.id) &&
                 Objects.equals(timeCreated, order.timeCreated) &&
                 Objects.equals(user, order.user) &&
                 Objects.equals(itemCount, order.itemCount) &&
@@ -106,7 +123,7 @@ public class Order {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, timeCreated, user, itemCount, price);
+        return Objects.hash(id, timeCreated, user, itemCount, price, closed);
     }
 
     @Override
@@ -114,9 +131,10 @@ public class Order {
         return "Order{" +
                 "id=" + id +
                 ", timeCreated=" + timeCreated +
-                ", user=" + user.getId() +
+                ", user=" + user +
                 ", itemCount=" + itemCount +
                 ", price=" + price +
+                ", closed=" + closed +
                 '}';
     }
 }
