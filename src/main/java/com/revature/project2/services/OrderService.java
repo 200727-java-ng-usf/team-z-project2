@@ -77,16 +77,6 @@ public class OrderService {
     }
 
     /**
-     * READ operation. (What is this?)
-     * @param user
-     * @return
-     */
-    @Transactional
-    public Order findUserByUser(User user) {
-        return orderRepo.findUserByUser(user).orElseThrow(ResourceNotFoundException::new);
-    }
-
-    /**
      * UPDATE operation
      * @param updateOrder
      * @return

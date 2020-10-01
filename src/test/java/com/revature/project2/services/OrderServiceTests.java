@@ -58,6 +58,17 @@ public class OrderServiceTests {
         sut.deleteById(-10);
     }
 
+    @Test
+    public void updateUnsavedOrderReturnsFalse() {
+        // arrange
+        Order order = new Order(new Timestamp(1930, 4, 10, 8, 20, 20, 5), new User(1, "Adam", "Inn", "admin", "secret", "admin@app.com", Role.ADMIN), 13, 200.00, false);
+        order.setPrice(500.00);
+
+        // act and assert
+        Assert.assertEquals(false, sut.update(order));
+
+    }
+
 
 
 
