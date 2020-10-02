@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 @EnableWebMvc // lets Spring see web annotations
-@Configuration
+@Configuration //
 @ComponentScan
 @EnableTransactionManagement // there are transactional annotations that Spring needs to see. Without this, Spring will ignore them
 @PropertySource("classpath:application.properties")
