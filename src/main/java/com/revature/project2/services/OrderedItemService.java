@@ -65,10 +65,10 @@ public class OrderedItemService {
      * @param item
      * @return
      */
-    @Transactional
-    public List<OrderedItem> findOrderedItemsByItem(Item item) {
-        return orderedItemRepo.findOrderedItemsByItem(item);
-    }
+//    @Transactional
+//    public List<OrderedItem> findOrderedItemsByItem(Item item) {
+//        return orderedItemRepo.findOrderedItemsByItem(item);
+//    }
 
     /**
      * UPDATE operation

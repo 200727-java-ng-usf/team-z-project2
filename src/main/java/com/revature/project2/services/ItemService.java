@@ -63,21 +63,21 @@ public class ItemService {
      * @param genre
      * @return
      */
-    @Transactional
-    public List<Item> findUsersByGenre(String genre) {
-        Genre genreEnum = Genre.valueOf(genre.toUpperCase());
-        return  itemRepo.findUsersByGenre(genreEnum);
-    }
+//    @Transactional
+//    public List<Item> findUsersByGenre(String genre) {
+//        Genre genreEnum = Genre.valueOf(genre.toUpperCase());
+//        return  itemRepo.findUsersByGenre(genreEnum);
+//    }
 
     /**
      * READ operation
      * @param name
      * @return
      */
-    @Transactional
-    public Item findUserByName(String name){
-        return itemRepo.findUserByName(name).orElseThrow(ResourceNotFoundException::new);
-    }
+//    @Transactional
+//    public Item findUserByName(String name){
+//        return itemRepo.findUserByName(name).orElseThrow(ResourceNotFoundException::new);
+//    }
 
     /**
      * UPDATE operation
@@ -110,8 +110,8 @@ public class ItemService {
      * @param name
      * @return
      */
-    @Transactional
-    public boolean isNameValid(String name){
-        return itemRepo.isNameValid(name);
-    }
+//    @Transactional
+//    public boolean isNameValid(String name){
+//        return itemRepo.isNameValid(name);
+//    }
 }
